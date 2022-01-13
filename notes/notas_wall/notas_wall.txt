@@ -1,0 +1,15 @@
+O objeto obj_wall é pai de todos os outros.
+O código de draw se baseia na variável wall_area.
+
+Essa variável basicamente separa os tipos de parede em
+0 - Paredes externas
+1 - Paredes internas
+	
+Todos esses objetos são filhos do objeto obj_wall. 
+A diferença entre ter wall_area com valor 0 ou 1 é no comportamento de troca das cores.
+
+As paredes de fora têm menos cores, e cores diferentes, do que as da
+parede de dentro.
+
+O evento alarm[0] existe somente como um tipo de cronômetro para a
+troca das cores.

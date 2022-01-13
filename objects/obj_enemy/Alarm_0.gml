@@ -1,0 +1,1 @@
+/// @desc retorna ao comportamento inicial

@@ -1,0 +1,39 @@
+Pontuação
+	Criar um método para controlar a criação de pontos no mapa - OK
+	Exibir a pontuação do jogador - OK
+	
+	
+Pontos de vida
+	Exibir os pontos de vida do jogador - OK
+	Efeito dos pontos de vida ao diminuir - OK
+	Efeito do player quando perder um ponto de vida - OK
+	Efeito sonoro - OK
+
+
+Inimigos
+	Inimigo atacando
+		Criar o inimigo - OK
+		Fazer o inimigo andar mais rápido quando ver o jogador - OK
+		Fazer o inimigo seguir o jogador por um tempo se em modo de caça - OK
+		Fazer com que o inimigo possa procurar pelo player em ambas as direções - OK
+		Interromper a caça quando o player atravessar o portal - OK
+		
+	Animação do inimigo
+		Fazer com que o inimigo tenha uma animação ao sair do spawn - OK
+		Criar um mini efeito de surpresa quando ver o player - OK
+		Efeito de som ao ver o player - OK
+		
+	Spawnando os inimigos
+		Criar um delay para controlar a saída dos inimigos do spawn
+	
+	
+JOGO
+	Botão para controlar o áudio do jogo - OK
+	Definir os estágios do jogo
+	
+	
+
+///
+
+NOTAS
+Coração extra dourado como powerup
