@@ -1,0 +1,12 @@
+PARTE 2
+	Level
+		Desenhar o level atual do player - OK
+		Definir o comportamento do inimigo baseado no level - OK
+		Definir a velocidade de mudança das cores de acordo com o level - OK
+		Definir os critérios para mudança de level - OK
+		Spawnar inimigos ao subir de nível - OK
+		Limitar o número de inimigos que são gerados de acordo com o level
+		
+	
+	DEBUG
+		Exibir um DEBUG para o level e os atributos do inimigo - OK

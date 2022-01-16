@@ -21,4 +21,3 @@ image_angle = 0
 
 //Ao final do teleporte, devolve o controle de movimento ao jogador
 has_control = true
-

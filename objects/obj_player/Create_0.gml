@@ -7,6 +7,9 @@ has_control = true
 //Pontos de vida do player
 player_hp = 3
 
+//Level atual do player
+player_level = 1	//padrão: 1
+
 
 //Método de movimento do player
 player_move = function() {

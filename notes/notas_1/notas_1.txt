@@ -1,14 +1,18 @@
+PARTE 1
+
 Pontuação
 	Criar um método para controlar a criação de pontos no mapa - OK
 	Exibir a pontuação do jogador - OK
-	
-	
-Pontos de vida
-	Exibir os pontos de vida do jogador - OK
-	Efeito dos pontos de vida ao diminuir - OK
-	Efeito do player quando perder um ponto de vida - OK
-	Efeito sonoro - OK
 
+Player
+	Visual
+		Efeito do jogador ao perder um ponto de vida
+	Pontos de vida
+		Exibir os pontos de vida do jogador - OK
+		Efeito ao perder um ponto de vida - OK
+		Efeito sonoro - OK
+	Controle
+		Ao apertar duas teclas de direções opostas, o player irá interromper o movimento
 
 Inimigos
 	Inimigo atacando
@@ -23,15 +27,18 @@ Inimigos
 		Criar um mini efeito de surpresa quando ver o player - OK
 		Efeito de som ao ver o player - OK
 		
-	Spawnando os inimigos
-		Criar um delay para controlar a saída dos inimigos do spawn
-	
+	Correções
+		Mudar como o inimigo vê o jogador - OK
+			Se estiver movendo-se para cima, deve procurar o jogador "de baixo para cima",
+			e caso esteja movendo-se para baixo, deve procurar "de cima para baixo"
+			Isto é para garantir que não inicie seu movimento na metade da parede
+			
+		Corrigir movimento quando se encontrar preso em uma parede - OK
+		Melhorar o funcionamento do teleporte
 	
 JOGO
 	Botão para controlar o áudio do jogo - OK
-	Definir os estágios do jogo
-	
-	
+	Criar um botão de pause
 
 ///
 

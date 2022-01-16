@@ -3,6 +3,9 @@
 //Desenha si próprio
 draw_self()
 
+//Determina a velocidade de acordo com o level
+var player_level = obj_player.player_level/2
+
 //Diz se a funcionalidade de mudar de cor está ativada
 var light_on = obj_controller.light_on
 var alarm_off = alarm[0] == -1
@@ -18,7 +21,7 @@ if (light_on) {
 		else if (color == second_color) color = first_color;
 		
 		//Aciona o alarme, que está funcionando somente como um contador de tempo
-		alarm[0] = room_speed
+		alarm[0] = room_speed/player_level
 	}
 	
 	//Muda as cores das paredes de dentro
@@ -32,7 +35,7 @@ if (light_on) {
 		else if (color == second_color) color = third_color;
 		else if (color == third_color) color = first_color;
 		
-		alarm[0] = room_speed
+		alarm[0] = room_speed/player_level
 	}
 
 	//Aplica a cor selecionada no efeito gerado pelo blendmode
