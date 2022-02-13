@@ -8,5 +8,5 @@ obj_controller.points += 10
 with(other) instance_destroy();
 
 //Toca o efeito sonoro ao ser destruído
-var play_sound = obj_controller.play_music
-if (play_sound) audio_play_sound(snd_point, 1, false);
+var play_sound = obj_controller.play_sound
+if (play_sound) audio_play_sound(snd_point, 1, false)

@@ -1,13 +1,16 @@
 {
   "spriteId": {
-    "name": "spr_blackhole",
-    "path": "sprites/spr_blackhole/spr_blackhole.yy",
+    "name": "spr_collision_enemy",
+    "path": "sprites/spr_collision_enemy/spr_collision_enemy.yy",
   },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
   "persistent": false,
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "obj_collision",
+    "path": "objects/obj_collision/obj_collision.yy",
+  },
   "physicsObject": false,
   "physicsSensor": false,
   "physicsShape": 1,
@@ -26,11 +29,11 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "teleport",
-    "path": "folders/Objects/teleport.yy",
+    "name": "background",
+    "path": "folders/Objects/background.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_blackhole",
+  "name": "obj_collision_enemy",
   "tags": [],
   "resourceType": "GMObject",
 }

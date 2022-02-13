@@ -66,15 +66,15 @@ check_level = function() {
 
 //Método que checa colisão e muda a direção do sprite
 check_collision = function() {
-	//Checa se o player está colidindo
+	//Checa se o inimigo está colidindo
 	var colliding = place_meeting(x+hspeed, y+vspeed, obj_collision)
 	
-	//Controla a colisão
+	//Controla a colisão e previne o inimigo de entrar na área do teleporte
 	if (colliding) {
-	hspeed *= -1
-	vspeed *= -1
+		hspeed *= -1
+		vspeed *= -1
 	}
-	
+
 	//Controla a direção do sprite
 	if (hspeed != 0) image_xscale = sign(hspeed);
 }
@@ -87,11 +87,11 @@ enemy_move = function() {
 	
 	//Se não estiver em modo de caça, se movimenta automaticamente
 	if (!hunting_mode) {
-		//Controla o movimento automático do inimigo
-		enemy_auto_move(walk_speed, map_grid);
-		
 		//Checando a colisão e a direção do sprite
 		check_collision()
+		
+		//Controla o movimento automático do inimigo
+		enemy_auto_move(walk_speed, map_grid);
 		
 		//Assim que o inimigo sair da área do spawn, sinaliza a variável de controle
 		if (leaving_area) {

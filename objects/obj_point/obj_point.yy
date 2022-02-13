@@ -24,8 +24,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "etc",
-    "path": "folders/Objects/etc.yy",
+    "name": "points",
+    "path": "folders/Objects/points.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_point",

@@ -9,5 +9,5 @@ if (inside_spawn_area) {
 }
 //Só poderá mover-se automaticamente se não estiver dentro da área de spawn
 else {
-	enemy_move();
+	enemy_move()
 }

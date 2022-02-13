@@ -1,7 +1,7 @@
 ///@method enemy_auto_move(walk_speed, collision_object)
 function enemy_auto_move(_walk_speed, _map_grid){
 	//Distância até o objeto de colisão
-	var colliding_distance = _map_grid
+	var colliding_distance = _map_grid/2
 	
 	//Objeto a se checar a colisão
 	var collision_object = obj_collision
@@ -25,8 +25,11 @@ function enemy_auto_move(_walk_speed, _map_grid){
 	//Se o inimigo estiver preso em uma parede, corrige a sua posição e seu movimento
 	if (stuck and outside_spawn) {
 		//_map_grid = 32
-		var valid_teleport_x = !place_meeting(ceil(x/_map_grid)*_map_grid, y, collision_object)
-		var valid_teleport_y = !place_meeting(x, (ceil(y/_map_grid)*_map_grid)-16, collision_object)
+		var colliding_wall_x = place_meeting(ceil(x/_map_grid)*_map_grid, y, collision_object)
+		var colliding_wall_y = place_meeting(x, (ceil(y/_map_grid)*_map_grid)-16, collision_object)
+		
+		var valid_teleport_x = !colliding_wall_x
+		var valid_teleport_y = !colliding_wall_y
 		
 		//Teleporta o inimigo ao último grid válido no eixo x
 		if (valid_teleport_x) x = ceil(x/_map_grid)*_map_grid

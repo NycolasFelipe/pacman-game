@@ -3,6 +3,7 @@ PARTE 1
 Pontuação
 	Criar um método para controlar a criação de pontos no mapa - OK
 	Exibir a pontuação do jogador - OK
+	Criar um efeito quando restar somente um ponto, para chamar a atenção do player - OK
 
 Player
 	Visual
@@ -12,7 +13,7 @@ Player
 		Efeito ao perder um ponto de vida - OK
 		Efeito sonoro - OK
 	Controle
-		Ao apertar duas teclas de direções opostas, o player irá interromper o movimento
+		Ao apertar duas teclas de direções opostas, o player irá interromper o movimento - OK
 
 Inimigos
 	Inimigo atacando

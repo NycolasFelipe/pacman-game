@@ -36,7 +36,6 @@ function create_points(){
 	}
 	
 	
-	
 	//Bloco responsável por destruir a instância caso ela colida com a parede ou a
 	//safe_area
 	with (obj_point) {
