@@ -26,11 +26,14 @@ if (instance_exists(obj_player)) {
 
 
 //DEBUG Desenha o level atual do jogador
-draw_set_font(fnt_main)
-draw_text(x_text, y_text*10, string(obj_player.player_level))
+//if (instance_exists(obj_player)) var player_level = obj_player.player_level
+//else var player_level = 1
 
-if (instance_exists(obj_enemy)) {
-	var enemy_debug_info = string(obj_enemy.walk_speed) + "," + string(obj_enemy.hunting_speed) + ","
-	enemy_debug_info += string(obj_enemy.hunting_multiplier) + "," + string(obj_enemy.hunting_time)
-	draw_text(x_text, y_text*11, enemy_debug_info)
-}
+//draw_set_font(fnt_main)
+//draw_text(x_text, y_text*10, string(player_level))
+
+//if (instance_exists(obj_enemy)) {
+//	var enemy_debug_info = string(obj_enemy.walk_speed) + "," + string(obj_enemy.hunting_speed) + ","
+//	enemy_debug_info += string(obj_enemy.hunting_multiplier) + "," + string(obj_enemy.hunting_time)
+//	draw_text(x_text, y_text*11, enemy_debug_info)
+//}

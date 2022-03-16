@@ -58,7 +58,7 @@
                             {"th0":1.0,"th1":-1.0,"tv0":0.0,"tv1":0.0,"x":0.5446989,"y":2.16483521,},
                             {"th0":1.0,"th1":-1.0,"tv0":0.0,"tv1":0.0,"x":1.0,"y":1.2747252,},
                           ],"resourceVersion":"1.0","name":"y","tags":[],"resourceType":"GMAnimCurveChannel",},
-                      ],"parent":{"name":"scale","path":"sequences/seq_player_portal/seq_player_portal.yy",},"resourceVersion":"1.2","name":"Scale","tags":[],"resourceType":"GMAnimCurve",},"RealValue":0.0,"AnimCurveId":null,"resourceVersion":"1.0","resourceType":"RealKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<RealKeyframe>",},
+                      ],"parent":{"name":"scale","path":"sequences/seq_player_portal/seq_player_portal.yy",},"resourceVersion":"1.2","name":"","tags":[],"resourceType":"GMAnimCurve",},"RealValue":0.0,"AnimCurveId":null,"resourceVersion":"1.0","resourceType":"RealKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<RealKeyframe>",},
             ],"resourceVersion":"1.0","resourceType":"KeyframeStore<RealKeyframe>",},"trackColour":4294068423,"inheritsTrackColour":true,"builtinName":15,"traits":0,"interpolation":1,"tracks":[],"events":[],"isCreationTrack":false,"resourceVersion":"1.0","name":"scale","tags":[],"resourceType":"GMRealTrack","modifiers":[],},
       ],"events":[],"isCreationTrack":false,"resourceVersion":"1.0","name":"spr_player","tags":[],"resourceType":"GMGraphicTrack","modifiers":[],},
   ],

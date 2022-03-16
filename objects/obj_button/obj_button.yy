@@ -25,8 +25,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "etc",
-    "path": "folders/Objects/etc.yy",
+    "name": "buttons",
+    "path": "folders/Objects/buttons.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_button",

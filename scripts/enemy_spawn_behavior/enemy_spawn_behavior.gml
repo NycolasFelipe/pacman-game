@@ -29,7 +29,7 @@ function enemy_spawn_behavior(_id, _walk_speed, _leaving_area, _map_grid){
 			
 			//Retorna a imagem cadeado ao seu index inicial
 			obj_padlock.image_index = 0
-		}	
+		}
 	}
 	
 	//Controla o movimento do inimigo dentro da área do spawn

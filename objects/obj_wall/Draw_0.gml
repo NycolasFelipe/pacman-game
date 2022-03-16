@@ -4,7 +4,8 @@
 draw_self()
 
 //Determina a velocidade de acordo com o level
-var player_level = obj_player.player_level/2
+if instance_exists(obj_player) var player_level = obj_player.player_level/2;
+else var player_level = 3
 
 //Diz se a funcionalidade de mudar de cor está ativada
 var light_on = obj_controller.light_on

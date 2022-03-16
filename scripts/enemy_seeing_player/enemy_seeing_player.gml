@@ -1,5 +1,5 @@
-///@method enemy_seeing_player(id, map_grid, hunting_speed, hunting_mode, hunting_time)
-function enemy_seeing_player(_id, _map_grid, _hunting_speed, _hunting_mode, _hunting_time, _hunting_multiplier){
+///@method enemy_seeing_player(id, map_grid, hunting_speed, hunting_mode, hunting_time, hunting_multiplier)
+function enemy_seeing_player(_id, _map_grid, _hunting_speed, _hunting_mode, _hunting_time, _hunting_multiplier) {
 	
 	//Distância que o inimigo pode ver o player
 	var distance = _map_grid * _hunting_multiplier;
@@ -79,12 +79,11 @@ function enemy_seeing_player(_id, _map_grid, _hunting_speed, _hunting_mode, _hun
 			_id.hunting_mode = true;
 		
 			//Inicia a velocidade de caça
-			if (hspeed != 0) hspeed = _hunting_speed;// * can_see_x;
-			else if (vspeed != 0) vspeed = _hunting_speed;// * can_see_y;
+			if (hspeed != 0) hspeed = _hunting_speed;		// * can_see_x;
+			else if (vspeed != 0) vspeed = _hunting_speed;	// * can_see_y;
 	
 			//Inicia o alarme que terá a duração do tempo de caça
-			if (_id.alarm[0] == -1) _id.alarm[0] = room_speed * _hunting_time;
-
+			if (_id.alarm[0] == -1) _id.alarm[0] = room_speed*_hunting_time;
 		
 			//Animação antes de iniciar o modo de caça
 			switch(_id.sprite_index) {

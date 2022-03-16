@@ -7,7 +7,8 @@ Pontuação
 
 Player
 	Visual
-		Efeito do jogador ao perder um ponto de vida
+		Efeito do jogador ao perder um ponto de vida - OK
+		Efeito quando restar somente um coração de vida - OK
 	Pontos de vida
 		Exibir os pontos de vida do jogador - OK
 		Efeito ao perder um ponto de vida - OK
@@ -35,11 +36,12 @@ Inimigos
 			Isto é para garantir que não inicie seu movimento na metade da parede
 			
 		Corrigir movimento quando se encontrar preso em uma parede - OK
-		Melhorar o funcionamento do teleporte
+		Melhorar o funcionamento do teleporte - OK
 	
 JOGO
 	Botão para controlar o áudio do jogo - OK
-	Criar um botão de pause
+	Tela de game over quando o jogador perder todas as vidas - OK
+	Criar um botão de pause - OK
 
 ///
 

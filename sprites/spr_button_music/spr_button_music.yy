@@ -2,15 +2,15 @@
   "bboxMode": 0,
   "collisionKind": 1,
   "type": 0,
-  "origin": 4,
+  "origin": 5,
   "preMultiplyAlpha": false,
   "edgeFiltering": false,
   "collisionTolerance": 0,
   "swfPrecision": 2.525,
-  "bbox_left": 0,
-  "bbox_right": 35,
-  "bbox_top": 0,
-  "bbox_bottom": 35,
+  "bbox_left": 4,
+  "bbox_right": 31,
+  "bbox_top": 4,
+  "bbox_bottom": 31,
   "HTile": false,
   "VTile": false,
   "For3D": false,
@@ -24,12 +24,12 @@
   "gridX": 0,
   "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"c279ec72-251d-4cd9-b6a8-b668cd2ce018","path":"sprites/spr_button_music/spr_button_music.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"c279ec72-251d-4cd9-b6a8-b668cd2ce018","path":"sprites/spr_button_music/spr_button_music.yy",},"LayerId":{"name":"08fdca9c-eba2-4be9-90be-ff65c1f5df19","path":"sprites/spr_button_music/spr_button_music.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"spr_button_music","path":"sprites/spr_button_music/spr_button_music.yy",},"resourceVersion":"1.0","name":"c279ec72-251d-4cd9-b6a8-b668cd2ce018","tags":[],"resourceType":"GMSpriteFrame",},
-    {"compositeImage":{"FrameId":{"name":"94cd3187-36c4-43d1-bf1a-ad41aff525c2","path":"sprites/spr_button_music/spr_button_music.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"94cd3187-36c4-43d1-bf1a-ad41aff525c2","path":"sprites/spr_button_music/spr_button_music.yy",},"LayerId":{"name":"08fdca9c-eba2-4be9-90be-ff65c1f5df19","path":"sprites/spr_button_music/spr_button_music.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"spr_button_music","path":"sprites/spr_button_music/spr_button_music.yy",},"resourceVersion":"1.0","name":"94cd3187-36c4-43d1-bf1a-ad41aff525c2","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"b79422fa-6dd6-40c6-a8ea-52ae2b3c4619","path":"sprites/spr_button_music/spr_button_music.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"b79422fa-6dd6-40c6-a8ea-52ae2b3c4619","path":"sprites/spr_button_music/spr_button_music.yy",},"LayerId":{"name":"acfe8aac-25c9-4c99-82cb-1368d799a2db","path":"sprites/spr_button_music/spr_button_music.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"spr_button_music","path":"sprites/spr_button_music/spr_button_music.yy",},"resourceVersion":"1.0","name":"b79422fa-6dd6-40c6-a8ea-52ae2b3c4619","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"cd3034fb-946f-4d93-a114-36b9ea7af03b","path":"sprites/spr_button_music/spr_button_music.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"cd3034fb-946f-4d93-a114-36b9ea7af03b","path":"sprites/spr_button_music/spr_button_music.yy",},"LayerId":{"name":"acfe8aac-25c9-4c99-82cb-1368d799a2db","path":"sprites/spr_button_music/spr_button_music.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"spr_button_music","path":"sprites/spr_button_music/spr_button_music.yy",},"resourceVersion":"1.0","name":"cd3034fb-946f-4d93-a114-36b9ea7af03b","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
     "spriteId": {"name":"spr_button_music","path":"sprites/spr_button_music/spr_button_music.yy",},
@@ -44,8 +44,8 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"5db244d7-fe00-4f29-8498-2fcf004beda9","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"c279ec72-251d-4cd9-b6a8-b668cd2ce018","path":"sprites/spr_button_music/spr_button_music.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
-            {"id":"60eeeeec-524f-4e01-ba8a-25db2d411ac4","Key":1.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"94cd3187-36c4-43d1-bf1a-ad41aff525c2","path":"sprites/spr_button_music/spr_button_music.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"04f99146-5f0b-46df-8c92-e79bb14abaa8","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"b79422fa-6dd6-40c6-a8ea-52ae2b3c4619","path":"sprites/spr_button_music/spr_button_music.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"8be3a516-dd73-446f-99b0-b6a618dfbddf","Key":1.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"cd3034fb-946f-4d93-a114-36b9ea7af03b","path":"sprites/spr_button_music/spr_button_music.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack","modifiers":[],},
     ],
     "visibleRange": null,
@@ -58,7 +58,7 @@
     "backdropHeight": 768,
     "backdropXOffset": 0.0,
     "backdropYOffset": 0.0,
-    "xorigin": 18,
+    "xorigin": 36,
     "yorigin": 18,
     "eventToFunction": {},
     "eventStubScript": null,
@@ -69,12 +69,12 @@
     "resourceType": "GMSequence",
   },
   "layers": [
-    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"08fdca9c-eba2-4be9-90be-ff65c1f5df19","tags":[],"resourceType":"GMImageLayer",},
+    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"acfe8aac-25c9-4c99-82cb-1368d799a2db","tags":[],"resourceType":"GMImageLayer",},
   ],
   "nineSlice": null,
   "parent": {
-    "name": "etc",
-    "path": "folders/Sprites/etc.yy",
+    "name": "buttons",
+    "path": "folders/Sprites/buttons.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_button_music",

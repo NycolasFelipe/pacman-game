@@ -1,0 +1,123 @@
+/// @desc iniciando as variáveis
+
+//Estado 1: parado, dando o tiro 2
+//Estado 2: movendo e dando o tiro 1
+//Estado 3: parado intercalando entre o tiro 1 e 2
+
+//(Estado 4)
+//Estado especial: ficar invulnerável enquanto cria dois minions
+//para recuperar a vida
+
+//Velocidade de movimento do boss
+move_speed = 5
+
+
+
+//Estado atual do boss
+current_state = choose("state_1", "state_2", "state_3")
+
+//DEBUG - Força o inicio no estado 1
+current_state = "state_3"
+
+//Tempo de espera para que ocorra a troca de estado
+state_delay = room_speed * 10 // 10 segundos
+
+//Contador de tempo do estado (inicia já em 10 segundos)
+state_time = state_delay
+
+
+
+//Iniciando o sistema de vida
+max_hp = 2000
+hp = max_hp
+
+
+
+//Tempo de espera para que o boss possa atirar novamente
+shooting_delay = room_speed/2
+
+//Contador de tempo do tiro do boss
+shooting_time = 0
+
+
+
+//Método para o tiro 1
+shooting_1 = function() {
+	instance_create_layer(x, y+80, "bullets", obj_bullet_minion)
+}
+
+//Método para o tiro 2
+///@method shooting_2(shoot_left, shoot_right)
+shooting_2 = function(_shoot_left, _shoot_right) {
+	if (_shoot_left) {
+		//Tiro da esquerda
+		instance_create_layer(x-160, y+25, "bullets", obj_bullet_octopus)
+	}
+	if (_shoot_right) {
+		//Tiro da direita
+		instance_create_layer(x+160, y+25, "bullets", obj_bullet_octopus)
+	}
+}
+
+
+
+//Método para o estado 1 do boss
+state_1 = function() {
+	//Enquanto estiver nesse estado, diminui o tempo de espera do tiro
+	shooting_time--
+	
+	//Se o tempo de espera para o próximo tiro é 0, cria a instância do tiro
+	if (shooting_time <= 0) {
+		shooting_1()
+		
+		//Em seguida, define o tempo de espera novamente
+		shooting_time = shooting_delay
+	}
+}
+	
+//Método para o estado 2 do boss
+state_2 = function() {
+	//Enquanto estiver nesse estado, diminui o tempo de espera do tiro
+	shooting_time--
+	
+	//Se o tempo de espera para o próximo tiro é 0, cria as instâncias dos tiros laterais
+	if (shooting_time <= 0) {
+		shooting_2(true, true)
+
+		//Em seguida, define o tempo de espera novamente
+		shooting_time = shooting_delay * 2
+	}
+	
+	//Movimentação do boss
+	//Faz com que o boss fique se movimentando para a esquerda e para a direita
+	
+	//Inicia a movimentação
+	x += move_speed
+	
+	//Checa se o boss está colidindo com as bordas da tela
+	var colliding_right = (x >= room_width - sprite_width/2)
+	var colliding_left = (x <= sprite_width/2)
+	
+	//Se colidir, inverte a direção do movimento
+	if (colliding_right or colliding_left) move_speed *= -1;
+}
+	
+//Método para o estado 3 do boss
+state_3 = function() {
+	//Enquanto estiver nesse estado, diminui o tempo de espera do tiro
+	shooting_time--
+	
+	//Se o tempo de espera para o próximo tiro é 0, cria as instâncias dos tiros laterais
+	if (shooting_time <= 0) {
+		shooting_1()
+
+		//Em seguida, define o tempo de espera novamente
+		shooting_time = shooting_delay * 2
+	}
+	
+	//Cria o segundo tiro quando o tempo de delay chegar à metade
+	//Assim, cria uma alternância entre os tiros
+	if (shooting_time == shooting_delay) {
+		shooting_2(true, true)
+	}
+}

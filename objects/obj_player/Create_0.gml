@@ -1,14 +1,20 @@
 //Velocidade de movimento
-vel = 3;
+vel = 3;			//padrão: 3
 
 //Diz se o player está no controle no momento
 has_control = true;
 
 //Pontos de vida do player
-player_hp = 3;
+player_hp = 3;		//padrão: 3
 
 //Level atual do player
 player_level = 1;	//padrão: 1
+
+//Variável de controle da animação do player sofrendo dano
+play_seq_hurt = false;
+
+//Variável que controla o alfa do player
+num = 1;
 
 
 //Método de movimento do player
@@ -128,13 +134,23 @@ life_points = function() {
 		//Diminui os pontos de vida
 		player_hp--;
 		
-		//Toca o som da animação (somente se o som estiver ativado)
-		if (obj_controller.play_sound) audio_play_sound(snd_life_point_less, 0, false);
+		//Cria e define os parâmetros da sequência de animação quando o player perde vida
+		player_seq_hurt = layer_sequence_create("Player", x, y, seq_player_hurt);
+		play_seq_hurt = true;
+
+		layer_sequence_xscale(player_seq_hurt, image_xscale);
+		layer_sequence_yscale(player_seq_hurt, image_yscale);
+		layer_sequence_angle(player_seq_hurt, image_angle);
+		layer_sequence_speedscale(player_seq_hurt, 1.2);
+
+		//Toca o som de perder vida
+		if (obj_controller.play_sound) audio_play_sound(snd_life_point_less, 1 , false);
+		
 		
 		//Executa a sequência de animação dos pontos de vida
 		var x_text = 230 + (player_hp * 50);	//mesma posição horizontal dos pontos de vida
 		var y_text = 275;						//mesma posição vertical dos pontos de vida
-		layer_sequence_create("player", x_text, y_text, seq_life_point_less);
+		layer_sequence_create("Player", x_text, y_text, seq_life_point_less);
 	}
 	
 	//Destrói o inimigo

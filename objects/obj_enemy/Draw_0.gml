@@ -2,7 +2,7 @@
 
 draw_self()
 
-if (obj_dev_test.dev_mode) {
+if (obj_button_dev_test.dev_mode) {
 	//Define a cor a ser utilizada
 	draw_set_color(c_yellow)
 

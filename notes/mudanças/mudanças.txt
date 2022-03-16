@@ -1,8 +1,8 @@
-- Conserto de bug no sprite quando em modo de caça - OK
-- Melhora na movimentação do player. Agora é possível interromper o movimento ao pressionar duas teclas de movimento
-que estão direções opostas - OK
-- Agora quando restar somente 1 ponto para subir de level, um aviso será criado para alertar o player de sua posição - OK
-- Melhora do teleporte - OK
-- Às vezes o inimigo não vê o player quando deveria - OK
-- Melhorar visão Parede X Player - OK
-- Mudar o inimigo para uma posição válida quando em modo de caça - OK
+Criar um efeito de quando o player perder um ponto de vida - OK
+Efeito de quando estiver no último ponto de vida - OK
+Funcionalidade de pausa - OK
+Animação de game over - OK
+	Apertar qualquer tecla reinicia o jogo
+Mais opções de controle do som
+
+Concluindo, revisar o código

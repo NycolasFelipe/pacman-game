@@ -1,11 +1,18 @@
 /// @desc spawna os inimigos
 
-//Level do jogador, armazenado no obj_player
-var player_level = obj_player.player_level;
+//Level e vida do jogador
+if (instance_exists(obj_player)) {
+	var player_level = obj_player.player_level;
+	var player_hp = obj_player.player_hp;
+}
+else {
+	var player_level = 1
+	var player_hp = 0
+}
 
 
 //Método para spawnar os inimigos
-if (alarm[1] == -1) {
+if (alarm[1] == -1 and not(global.game_is_paused)) {
 	switch(player_level) {
 		case 1:	//padrão: 1
 			spawn_enemy();
@@ -24,7 +31,13 @@ if (alarm[1] == -1) {
 player_level_up();
 
 //Checa o teleporte e controla a sequência do portal
-teleport_check();
+if not(global.game_is_paused) teleport_check();
+
+
+if (player_hp <= 0) {
+	instance_destroy(obj_player);
+	game_over_sequence();
+}
 
 
 ///DEBUG
