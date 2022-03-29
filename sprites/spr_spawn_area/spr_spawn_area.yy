@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_spawn_area","path":"sprites/spr_spawn_area/spr_spawn_area.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_spawn_area",
     "tags": [],
     "resourceType": "GMSequence",

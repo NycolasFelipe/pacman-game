@@ -60,7 +60,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_wall_intersection","path":"sprites/spr_wall_intersection/spr_wall_intersection.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_wall_intersection",
     "tags": [],
     "resourceType": "GMSequence",

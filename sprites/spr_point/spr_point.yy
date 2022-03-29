@@ -63,7 +63,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_point","path":"sprites/spr_point/spr_point.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_point",
     "tags": [],
     "resourceType": "GMSequence",

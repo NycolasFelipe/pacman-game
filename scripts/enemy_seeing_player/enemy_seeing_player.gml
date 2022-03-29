@@ -1,6 +1,7 @@
-///@method enemy_seeing_player(id, map_grid, hunting_speed, hunting_mode, hunting_time, hunting_multiplier)
-function enemy_seeing_player(_id, _map_grid, _hunting_speed, _hunting_mode, _hunting_time, _hunting_multiplier) {
+///@method enemy_seeing_player(id, map_grid, hunting_speed, hunting_mode, hunting_time, hunting_duration, hunting_multiplier)
+function enemy_seeing_player(_id, _map_grid, _hunting_speed, _hunting_mode, _hunting_time, _hunting_duration, _hunting_multiplier) {
 	
+	#region SETTING VARIABLES
 	//Distância que o inimigo pode ver o player
 	var distance = _map_grid * _hunting_multiplier;
 	
@@ -14,7 +15,9 @@ function enemy_seeing_player(_id, _map_grid, _hunting_speed, _hunting_mode, _hun
 	else var player = noone;
 	
 	var collision = obj_collision;
+	#endregion
 	
+	#region CHECKING COLLISION WITH PLAYER
 	//Checagem do movimento horizontal
 	//Muda a posição x inicial de checagem de acordo com a direção do movimento
 	if (moving_x) x_pos = x-sign(hspeed)*(sprite_get_width(spr_enemy)/2);
@@ -34,21 +37,22 @@ function enemy_seeing_player(_id, _map_grid, _hunting_speed, _hunting_mode, _hun
 	//Checa se o inimigo vê o player, checando a intercecção entre colliding_player e colliding_wall	
 	var can_see_x = colliding_player_right-colliding_player_left;
 	var can_see_y = colliding_player_down-colliding_player_up;
+	#endregion
 	
 	
 	//Se puder ver o player vertical ou horizontalmente, e não estiver em modo de caça,
 	//aumenta a velocidade do inimigo, e ativa o modo de caça
-	if (can_see_x-can_see_y != 0) and (!_hunting_mode) {
-		
+	if (can_see_x-can_see_y != 0) && (!_hunting_mode) {
+		#region REQUIREMENTS TO START HUNT
 		//Checa o módulo da distância horizontal e vertical até o player
 		var distance_x_to_player = abs(player.x-x);
 		var distance_y_to_player = abs(player.y-y);
 		
 		//Checa qual é a posição do player em relação ao inimigo
-		var player_at_right = x < player.x and distance_y_to_player < 3;
-		var player_at_left = player.x < x and distance_y_to_player < 3;	
-		var player_at_bottom = y < player.y and distance_x_to_player < 3;
-		var player_at_top = player.y < y and distance_x_to_player < 3;
+		var player_at_right = x < player.x && distance_y_to_player < 3;
+		var player_at_left = player.x < x && distance_y_to_player < 3;	
+		var player_at_bottom = y < player.y && distance_x_to_player < 3;
+		var player_at_top = player.y < y && distance_x_to_player < 3;
 		
 		//Variável de controle do modo de caça
 		var start_hunt = false;
@@ -72,7 +76,9 @@ function enemy_seeing_player(_id, _map_grid, _hunting_speed, _hunting_mode, _hun
 			var seeing_wall_up = collision_line(x_pos, y_pos, x_pos, y_pos-distance_y_to_player, collision, false, false);
 			if not(seeing_wall_up) start_hunt = true;
 		}
+		#endregion
 		
+		#region HUNT BEHAVIOR
 		//Se cumprir os requisitos do bloco anterior, inicia o modo de caça
 		if (start_hunt) {
 			//Aciona a flag do modo de caça
@@ -83,6 +89,7 @@ function enemy_seeing_player(_id, _map_grid, _hunting_speed, _hunting_mode, _hun
 			else if (vspeed != 0) vspeed = _hunting_speed;	// * can_see_y;
 	
 			//Inicia o alarme que terá a duração do tempo de caça
+			_id.hunting_time = _hunting_duration;
 			if (_id.alarm[0] == -1) _id.alarm[0] = room_speed*_hunting_time;
 		
 			//Animação antes de iniciar o modo de caça
@@ -106,11 +113,15 @@ function enemy_seeing_player(_id, _map_grid, _hunting_speed, _hunting_mode, _hun
 			//Toca um som quando ver o player
 			if (obj_controller.play_sound) audio_play_sound(snd_player_spotted, 0, false);
 		}
+		#endregion
 	}
+	
+	#region END HUNT
+	if !(global.game_is_paused) _id.hunting_time--;
 	
 	//Quando o tempo do alarme terminar, e se estiver em modo de caça, retorna à
 	//velocidade padrão
-	if (_id.alarm[0] == -1 and _hunting_mode) {
+	if (_id.hunting_time <= 0 && _hunting_mode) {
 		var walk_speed = _id.walk_speed;
 
 		hspeed = sign(hspeed) * walk_speed;
@@ -134,4 +145,5 @@ function enemy_seeing_player(_id, _map_grid, _hunting_speed, _hunting_mode, _hun
 				break;
 		}
 	}
+	#endregion
 }

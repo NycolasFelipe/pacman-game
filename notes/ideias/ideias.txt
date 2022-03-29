@@ -24,7 +24,7 @@ Level par (nível > 1):
 	+ movimento dos inimigos
 
 
-Quanto maior for o level, maior será a velocidade com que as paredes mudam de cor
+Quanto maior for o level, maior será a velocidade com que as paredes mudam de cor - OK
 A partir de um certo level, a música troca para uma mais rápida
 
 Quanto mais tempo passa, mais inimigos vão spawnando, e quanto maior o level,
@@ -44,3 +44,13 @@ var distance_y = _map_grid * 5
 Level 1:
 	walk_speed = 1
 	hunting_speed = 2
+
+
+Efeito ao pegar o último ponto
+Interromper a caça dos inimigos ao entrar em ghost mode - ok
+
+Detectar quando o player estiver dentro da parede, e o teleportar para fora
+Definir a chance de spawn dos powerups
+Corrigir a posição do botão de devmode - ok
+Mudar o sprite dos fantasmas e diminuir a velocidade quando em modo invincible
+corrigir sequencia invincible

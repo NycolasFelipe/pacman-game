@@ -1,17 +1,12 @@
 //Velocidade de movimento
-vel = 3;			//padrão: 3
+vel_default = 3;
+vel = vel_default;
 
 //Diz se o player está no controle no momento
 has_control = true;
 
 //Pontos de vida do player
 player_hp = 3;		//padrão: 3
-
-//Level atual do player
-player_level = 1;	//padrão: 1
-
-//Variável de controle da animação do player sofrendo dano
-play_seq_hurt = false;
 
 //Variável que controla o alfa do player
 num = 1;
@@ -43,6 +38,9 @@ player_move = function() {
 
 	//Checa se o player está colidindo
 	var colliding = place_meeting(x+hspeed, y+vspeed, collision_object);
+	
+	//image_xscale = vel_default/vel;
+	//image_yscale = vel_default/vel;
 	
 	//Se houver colisão, a movimentação do player é interrompida
 	if (colliding) {
@@ -96,6 +94,13 @@ player_move = function() {
 		image_angle = facing_right;
 		if (image_yscale != 1) image_yscale = 1;
 	}
+	
+
+	//UNSTUCK PLAYER
+	if (floor(x) != x || floor(y) != y) {
+		x = floor(x);
+		y = floor(y);
+	}
 }
 
 
@@ -128,31 +133,89 @@ player_stop = function() {
 }
 
 	
-//Método que controla os pontos de vida
-life_points = function() {
-	if (player_hp > 0) {
-		//Diminui os pontos de vida
+
+#region PLAYER HITTING ENEMIES
+//HIT ANIMATION FLAG
+run_player_hit_sequence = false;
+
+//CONTROL IF PLAYER IS INVINCIBLE
+player_invincible = false;
+
+//CONTROL IF PLAYER IS IN GHOST MODE
+ghost_mode = false;
+
+player_hit = function() {
+	if (player_hp > 0 && !ghost_mode) {
 		player_hp--;
 		
-		//Cria e define os parâmetros da sequência de animação quando o player perde vida
-		player_seq_hurt = layer_sequence_create("Player", x, y, seq_player_hurt);
-		play_seq_hurt = true;
+		//CREATE ANIMATION SEQUENCE WHEN PLAYER LOSES LIFE
+		player_seq_hit = layer_sequence_create("Player", x, y, seq_player_hurt);
+		run_player_hit_sequence = true;
 
-		layer_sequence_xscale(player_seq_hurt, image_xscale);
-		layer_sequence_yscale(player_seq_hurt, image_yscale);
-		layer_sequence_angle(player_seq_hurt, image_angle);
-		layer_sequence_speedscale(player_seq_hurt, 1.2);
+		layer_sequence_xscale(player_seq_hit, image_xscale);
+		layer_sequence_yscale(player_seq_hit, image_yscale);
+		layer_sequence_angle(player_seq_hit, image_angle);
+		layer_sequence_speedscale(player_seq_hit, 1.2);
 
-		//Toca o som de perder vida
+		//PLAY SOUND EFFECT
 		if (obj_controller.play_sound) audio_play_sound(snd_life_point_less, 1 , false);
 		
-		
-		//Executa a sequência de animação dos pontos de vida
-		var x_text = 230 + (player_hp * 50);	//mesma posição horizontal dos pontos de vida
-		var y_text = 275;						//mesma posição vertical dos pontos de vida
+		//CREATE SEQUENCE ANIMATION ON THE HUD
+		var x_text = (obj_controller.draw_text_xl+20)+obj_controller.temp_life_points_x*player_hp;
+		var y_text = (obj_controller.draw_text_y+195);
 		layer_sequence_create("Player", x_text, y_text, seq_life_point_less);
+		
+		//DESTROY ENEMY INSTANCE
+		with (other) instance_destroy();
 	}
-	
-	//Destrói o inimigo
-	with (other) instance_destroy();
+	else if (player_invincible) {	
+		//CREATE ANIMATION SEQUENCE WHEN PLAYER HIT ENEMY BUT IS IN INVINCIBLE MODE
+		player_seq_hit = layer_sequence_create("Player", x, y, seq_player_invincible);
+		run_player_hit_sequence = true;
+		
+		layer_sequence_xscale(player_seq_hit, image_xscale);
+		layer_sequence_yscale(player_seq_hit, image_yscale);
+		layer_sequence_angle(player_seq_hit, image_angle);
+		
+		//PLAY SOUND EFFECT
+		if (obj_controller.play_sound) audio_play_sound(snd_player_eating, 1 , false);
+		
+		//DESTROY ENEMY INSTANCE
+		with (other) instance_destroy();
+	}
 }
+
+player_hit_sequence = function() {
+	if (run_player_hit_sequence and player_hp > 0) {
+		//LAYER SEQUENCE FOLLOWS THE PLAYER
+		layer_sequence_x(player_seq_hit, x);
+		layer_sequence_y(player_seq_hit, y);
+	
+		//TEMPORARILY REDUCE PLAYER'S ALPHA WHEN LOSING HP
+		image_alpha = 0;
+		
+		//IF NOT IN INVINCIBLE MODE, REDUCES TEMPORARILY THE PLAYER'S SPEED
+		if not(player_invincible) {
+			if (hspeed != 0) hspeed = sign(hspeed)*vel/2;
+			if (vspeed != 0) vspeed = sign(vspeed)*vel/2;
+		}
+	
+		//WHEN THE SEQUENCE IS FINISHED, RESTORE ALL PREVIOUS VALUES
+		if (layer_sequence_is_finished(player_seq_hit)) {
+			layer_sequence_destroy(player_seq_hit);
+			run_player_hit_sequence = false;
+		
+			image_alpha = 1;
+			
+			if not(player_invincible) {
+				if (hspeed != 0) hspeed = sign(hspeed)*vel;
+				if (vspeed != 0) vspeed = sign(vspeed)*vel;
+			}
+		}
+	}
+	else if (player_hp == 1 && not(obj_controller.player_teleporting)) {
+		num++;
+		image_alpha = max(0.5,sin(num/4));
+	}
+}
+#endregion

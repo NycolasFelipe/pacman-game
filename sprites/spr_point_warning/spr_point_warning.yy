@@ -83,7 +83,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_point_warning","path":"sprites/spr_point_warning/spr_point_warning.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_point_warning",
     "tags": [],
     "resourceType": "GMSequence",

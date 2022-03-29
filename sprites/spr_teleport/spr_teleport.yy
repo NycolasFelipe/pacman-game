@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_teleport","path":"sprites/spr_teleport/spr_teleport.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_teleport",
     "tags": [],
     "resourceType": "GMSequence",

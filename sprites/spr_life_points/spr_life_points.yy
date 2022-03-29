@@ -138,7 +138,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_life_points","path":"sprites/spr_life_points/spr_life_points.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_life_points",
     "tags": [],
     "resourceType": "GMSequence",

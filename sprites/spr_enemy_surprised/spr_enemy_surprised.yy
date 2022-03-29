@@ -155,7 +155,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_enemy_surprised","path":"sprites/spr_enemy_surprised/spr_enemy_surprised.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_enemy_surprised",
     "tags": [],
     "resourceType": "GMSequence",

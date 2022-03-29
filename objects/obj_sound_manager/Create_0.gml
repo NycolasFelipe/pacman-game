@@ -6,7 +6,19 @@ moving_audio_control = false;
 moving_music_control = false;
 moving_effects_control = false;
 
-effects_sound = [snd_life_point_less, snd_player_spotted, snd_point, snd_portal];
+effects_sound = [
+snd_player_eating,
+snd_powerup_invincible,
+snd_powerup_speed,
+snd_powerup_ghost,
+snd_life_point_more,
+snd_life_point_less,
+snd_player_spotted,
+snd_point, 
+snd_portal,
+snd_game_over,
+snd_game_over_music
+];
 effects_sound_length = array_length(effects_sound);
 #endregion
 
@@ -15,8 +27,8 @@ effects_sound_length = array_length(effects_sound);
 //AUDIO BUTTON
 AUDIO = spr_button_audio;
 AUDIO_subimage = 0;
-AUDIO_x = obj_button_pause.x-64;
-AUDIO_y = obj_button_pause.y;
+AUDIO_x = x;
+AUDIO_y = y;
 AUDIO_width = sprite_get_width(AUDIO)/2;
 AUDIO_height = sprite_get_height(AUDIO)/2;
 AUDIO_scale = 1;
@@ -316,10 +328,17 @@ change_volume = function() {
 		var audio_multiplier = 1;
 		
 		switch (effect) {
+			case snd_player_eating: audio_multiplier = 0.2 break;
+			case snd_powerup_invincible: audio_multiplier = 0.1 break;
+			case snd_powerup_speed: audio_multiplier = 0.2 break;
+			case snd_powerup_ghost: audio_multiplier = 0.2 break;
+			case snd_life_point_more: audio_multiplier = 0.1 break;
 			case snd_life_point_less: audio_multiplier = 1 break;
 			case snd_player_spotted: audio_multiplier = 0.3 break;
 			case snd_point: audio_multiplier = 0.05 break;
-			case snd_portal: audio_multiplier = 0.8 break;
+			case snd_portal: audio_multiplier = 0.6 break;
+			case snd_game_over: audio_multiplier = 1 break;
+			case snd_game_over_music: audio_multiplier = 0.05;
 		}
 		
 		audio_sound_gain(effect, effects_volume*audio_volume*audio_multiplier, 0);

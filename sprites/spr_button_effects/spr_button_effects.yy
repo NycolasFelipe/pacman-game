@@ -63,7 +63,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_button_effects","path":"sprites/spr_button_effects/spr_button_effects.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_button_effects",
     "tags": [],
     "resourceType": "GMSequence",

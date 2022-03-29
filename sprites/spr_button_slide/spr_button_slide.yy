@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_button_slide","path":"sprites/spr_button_slide/spr_button_slide.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_button_slide",
     "tags": [],
     "resourceType": "GMSequence",

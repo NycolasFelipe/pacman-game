@@ -75,7 +75,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_padlock","path":"sprites/spr_padlock/spr_padlock.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_padlock",
     "tags": [],
     "resourceType": "GMSequence",

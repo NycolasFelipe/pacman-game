@@ -1,2 +1,2 @@
 /// @desc perde hp
-life_points();
+player_hit();

@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_game_over_message","path":"sprites/spr_game_over_message/spr_game_over_message.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_game_over_message",
     "tags": [],
     "resourceType": "GMSequence",

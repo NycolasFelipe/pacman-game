@@ -60,7 +60,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_wall_rectangle_middle","path":"sprites/spr_wall_rectangle_middle/spr_wall_rectangle_middle.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_wall_rectangle_middle",
     "tags": [],
     "resourceType": "GMSequence",

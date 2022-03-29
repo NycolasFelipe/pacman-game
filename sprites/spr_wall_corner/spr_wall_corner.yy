@@ -60,7 +60,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_wall_corner","path":"sprites/spr_wall_corner/spr_wall_corner.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_wall_corner",
     "tags": [],
     "resourceType": "GMSequence",

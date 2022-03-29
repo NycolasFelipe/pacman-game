@@ -60,7 +60,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_wall_middle","path":"sprites/spr_wall_middle/spr_wall_middle.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_wall_middle",
     "tags": [],
     "resourceType": "GMSequence",

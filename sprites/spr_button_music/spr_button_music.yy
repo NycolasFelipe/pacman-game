@@ -63,7 +63,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_button_music","path":"sprites/spr_button_music/spr_button_music.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_button_music",
     "tags": [],
     "resourceType": "GMSequence",

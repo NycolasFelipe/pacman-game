@@ -57,7 +57,7 @@
     "name": "Sequences",
     "path": "folders/Sequences.yy",
   },
-  "resourceVersion": "1.3",
+  "resourceVersion": "1.4",
   "name": "seq_portal",
   "tags": [],
   "resourceType": "GMSequence",

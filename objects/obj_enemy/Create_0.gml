@@ -11,7 +11,8 @@ hspeed = walk_speed;
 hunting_mode = false;
 
 //Tempo no modo de caça em segundos
-hunting_time = 0;		//valor definido em check_level(), de acordo com o level atual do jogador
+hunting_duration = 0;	//valor definido em check_level(), de acordo com o level atual do jogador
+hunting_time = 0;		
 
 //Número que multiplica o map_grid e determina o quão longe o inimigo consegue ver o player
 hunting_multiplier = 0;	//valor definido em check_level(), de acordo com o level atual do jogador
@@ -27,43 +28,47 @@ leaving_area = false;
 
 
 //Muda os valores dos atributos do inimigo de acordo com o level atual do jogador
+#region CHECKING LEVEL
+//SETTING VARIABLES
+forcing_level = false;
+
+level_values = [
+	//[walk_speed, hunting_speed, hunting_duration, hunting_multiplier]
+	[1,		2,		room_speed*5,	3],	//LEVEL 01
+	[1,		2,		room_speed*6,	4],	//LEVEL 03
+	[1.5,	2.5,	room_speed*6,	4],	//LEVEL 05
+	[1.5,	2.5,	room_speed*7,	5],	//LEVEL 07
+	[2,		3,		room_speed*7,	5],	//LEVEL 09
+	[2,		3,		room_speed*8,	6]	//LEVEL 10
+];
+
 check_level = function() {
-	if (instance_exists(obj_player)) var player_level = obj_player.player_level;
-	else var player_level = 1;
+	var level_index;
+	var player_level		= obj_controller.player_level;
+	var player_level_odd	= obj_controller.player_level % 2 == 1;
 	
-	//Valores iniciais dos inimigos, d - default
-	var d_walk_speed = 1;
-	var d_hunting_speed = 2;
-	var d_hunting_time = 3;
-	var d_hunting_multiplier = 3;
-	
-	switch(player_level) {
-		case 1:
-			walk_speed = d_walk_speed;
-			hunting_speed = d_hunting_speed;
-			hunting_time = d_hunting_time;
-			hunting_multiplier = d_hunting_multiplier;
-		break;
-		
-		case 2:
-			walk_speed = d_walk_speed+1;
-			hunting_speed = d_hunting_speed+1;
-			hunting_time = d_hunting_time+1;
-			hunting_multiplier = d_hunting_multiplier+1;
-		break;
-		
-		case 3:
-			hunting_time = d_hunting_time+2;
-			hunting_multiplier = d_hunting_multiplier+2;
-		break;
-		
-		case 4:
-			walk_speed = d_walk_speed+1.6;
-			hunting_speed = d_hunting_speed+1.6;
-		break;
+	if (player_level_odd && not(forcing_level)) {
+		switch (player_level) {
+			case 1:		level_index = 0 break;
+			default:	level_index = (player_level - player_level % 2)/2 break;
+		}
+		walk_speed			= level_values[level_index][0];
+		hunting_speed		= level_values[level_index][1];
+		hunting_duration	= level_values[level_index][2];
+		hunting_multiplier	= level_values[level_index][3];
+	}
+	else if not(forcing_level) {
+		switch (player_level) {
+			case 10:	level_index = 5 break;
+			default:	level_index = 0 break;
+		}
+		walk_speed			= level_values[level_index][0];
+		hunting_speed		= level_values[level_index][1];
+		hunting_duration	= level_values[level_index][2];
+		hunting_multiplier	= level_values[level_index][3];
 	}
 }
-
+#endregion
 
 //Método que checa colisão e muda a direção do sprite
 check_collision = function() {
@@ -105,5 +110,5 @@ enemy_move = function() {
 	else enemy_hunting(map_grid, hunting_speed);
 	
 	//Testa se o player pode ser visto pelo inimigo. Caso possa, ativa o modo de caça.
-	enemy_seeing_player(id, map_grid, hunting_speed, hunting_mode, hunting_time, hunting_multiplier);
+	enemy_seeing_player(id, map_grid, hunting_speed, hunting_mode, hunting_time, hunting_duration, hunting_multiplier);
 }

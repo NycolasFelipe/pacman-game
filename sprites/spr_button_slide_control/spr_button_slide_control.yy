@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_button_slide_control","path":"sprites/spr_button_slide_control/spr_button_slide_control.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_button_slide_control",
     "tags": [],
     "resourceType": "GMSequence",
