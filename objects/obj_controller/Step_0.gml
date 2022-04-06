@@ -1,10 +1,20 @@
+//CHECKING IF PLAYER'S ALIVE
+var player_exists = instance_exists(obj_player);
+
+#region PLAY BACKGROUND MUSIC
+background_music_time--;
+
+if (play_music && !background_music_playing && background_music_time <= 0) {
+	background_music_playing = true;
+	audio_play_sound(snd_background_music, 0, true);
+}
+#endregion
+
 #region PLAYER LEVEL
-player_level_up();
+if (player_exists) player_level_up();
 #endregion
 
 #region ENEMY SPAWN
-var player_exists = instance_exists(obj_player);
-
 if (player_exists && not(global.game_is_paused)) enemy_spawn();
 #endregion
 
@@ -18,9 +28,13 @@ powerups();
 #endregion
 
 #region GAME OVER SEQUENCE
-if (player_exists && obj_player.player_hp <= 0) instance_destroy(obj_player);
+if (player_exists && obj_player.player_hp <= 0) {
+	instance_destroy(obj_player);
+	light_on = false;
+	save_high_scores();
+}
 
-if !(player_exists) {
+if not(player_exists) {
 	var layers = ["Player", "Enemy", "Powerup", "Points", "Sequence_Portal_Effect", "Sequence_Portal", "Inside_Wall", "Outside_Wall"];
 	var layers_length = array_length(layers);
 	
@@ -30,16 +44,3 @@ if !(player_exists) {
 	game_restart_check();
 }
 #endregion
-
-#region DEBUG
-//Apertar seta p/ cima aumenta o nível do player e para baixo diminui
-level_up = keyboard_check_pressed(vk_up);
-level_down = keyboard_check_pressed(vk_down);
-
-if (level_up and player_level < 10) {
-	player_level++;
-	leveled_up = true;
-}
-else if (level_down and player_level > 1) player_level--;
-#endregion
-

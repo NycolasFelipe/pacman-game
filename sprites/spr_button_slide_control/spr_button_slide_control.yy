@@ -70,7 +70,7 @@
   "nineSlice": null,
   "parent": {
     "name": "buttons",
-    "path": "folders/Sprites/buttons.yy",
+    "path": "folders/Sprites/room_game/buttons.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_button_slide_control",

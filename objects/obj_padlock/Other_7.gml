@@ -1,3 +1,3 @@
-/// @desc controla velocidade de animação
-image_speed = 0
-image_index = 4
+//CONTROLS ANIMATION SPEED
+image_speed = 0;
+image_index = 4;

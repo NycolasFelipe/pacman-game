@@ -27,7 +27,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "teleport",
-    "path": "folders/Objects/teleport.yy",
+    "path": "folders/Objects/room_game/teleport.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_teleport",

@@ -165,7 +165,7 @@
   "nineSlice": null,
   "parent": {
     "name": "etc",
-    "path": "folders/Sprites/etc.yy",
+    "path": "folders/Sprites/room_game/etc.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_player",

@@ -70,7 +70,7 @@
   "nineSlice": null,
   "parent": {
     "name": "etc",
-    "path": "folders/Sprites/powerups/etc.yy",
+    "path": "folders/Sprites/room_game/powerups/etc.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_powerup_spawn",

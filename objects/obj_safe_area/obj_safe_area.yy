@@ -25,7 +25,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "background",
-    "path": "folders/Objects/background.yy",
+    "path": "folders/Objects/room_game/background.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_safe_area",

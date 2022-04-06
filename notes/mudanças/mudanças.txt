@@ -1,8 +1,0 @@
-Criar um efeito de quando o player perder um ponto de vida - OK
-Efeito de quando estiver no último ponto de vida - OK
-Funcionalidade de pausa - OK
-Animação de game over - OK
-	Apertar qualquer tecla reinicia o jogo
-Mais opções de controle do som - OK
-
-Concluindo, revisar o código

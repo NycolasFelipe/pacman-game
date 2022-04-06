@@ -169,7 +169,7 @@
   "nineSlice": null,
   "parent": {
     "name": "enemy_surprised",
-    "path": "folders/Sprites/enemy_surprised.yy",
+    "path": "folders/Sprites/room_game/enemy_surprised.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_enemy_surprised_red",

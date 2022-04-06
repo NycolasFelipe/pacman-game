@@ -1,26 +1,25 @@
 ///@method enemy_hunting(map_grid, hunting_speed)
 function enemy_hunting(_map_grid, _hunting_speed){
-	//Distância até o objeto de colisão
+	//DISTANCE TO COLLISION OBJECT
 	var colliding_distance = _map_grid;
 	
-	//Objeto a se checar a colisão
+	//COLLISION OBJECT
 	var collision_object = obj_collision;
 	
-	//Checa se há espaço para o inimigo virar 
+	//CHECKING IF THERE IS ROOM TO CHANGE DIRECTION
 	var right_has_space = !place_meeting(x+colliding_distance, y, collision_object);
-	var left_has_space = !place_meeting(x-colliding_distance, y, collision_object);
-	var down_has_space = !place_meeting(x, y+colliding_distance, collision_object);
-	var up_has_space = !place_meeting(x, y-colliding_distance, collision_object);
+	var left_has_space	= !place_meeting(x-colliding_distance, y, collision_object);
+	var down_has_space	= !place_meeting(x, y+colliding_distance, collision_object);
+	var up_has_space	= !place_meeting(x, y-colliding_distance, collision_object);
 
-	//Checa se o inimigo está colidindo
-	var colliding = place_meeting(x+hspeed, y+vspeed, collision_object);
+	//CHECKING IF ENEMY IS COLLIDING
+	var colliding = place_meeting(x+hspeed, y+vspeed, collision_object);	
 	
-	
-	//Diz se o inimigo está preso em uma parede
+	//CHECKING IF ENEMY IS STUCK IN A WALL
 	var stuck = (hspeed == 0 && vspeed == 0);
 		
 	if (stuck) {
-		//Posiciona o inimigo em uma posição válida
+		//PLACES THE ENEMY IN A VALID POSITION
 		var collision_object = obj_collision;
 		
 		var colliding_wall_x = place_meeting(ceil(x/_map_grid)*_map_grid, y, collision_object);
@@ -29,25 +28,25 @@ function enemy_hunting(_map_grid, _hunting_speed){
 		var valid_teleport_x = !colliding_wall_x;
 		var valid_teleport_y = !colliding_wall_y;
 		
-		//Teleporta o inimigo ao último grid válido no eixo x
+		//TELEPORT THE ENEMY TO THE LAST VALID GRID ON THE X AXIS
 		if (valid_teleport_x) x = ceil(x/_map_grid)*_map_grid;
 		else x = (ceil(x/_map_grid)*_map_grid)-_map_grid;
 		
-		//Teleporta o inimigo ao último grid válido no eixo y
+		//TELEPORT THE ENEMY TO THE LAST VALID GRID ON THE Y AXIS
 		if (valid_teleport_y) y = (ceil(y/_map_grid)*_map_grid)-16;
 		else y = (ceil(y/_map_grid)*_map_grid)-16;
 	}
 	
 	
-	//Se houver colisão, a movimentação do inimigo é interrompida
+	//IF THERE IS NO COLLISION AND PLAYER IS STILL ALIVE, MOVE NORMALLY
 	if (!colliding && instance_exists(obj_player)) {
 		var player = obj_player;
 		
-		//Checa a posição do player relativa ao inimigo
-		var player_right = player.x > x + _map_grid;
-		var player_left = player.x < x - _map_grid;
-		var player_down = player.y > y + _map_grid;
-		var player_up = player.y < y - _map_grid;
+		//CHECKS PLAYER'S POSITION RELATIVE TO THE ENEMY
+		var player_right	= player.x > x + _map_grid;
+		var player_left		= player.x < x - _map_grid;
+		var player_down		= player.y > y + _map_grid;
+		var player_up		= player.y < y - _map_grid;
 		
 		//Se move na última direção pedida
 		if (right_has_space && player_right) {

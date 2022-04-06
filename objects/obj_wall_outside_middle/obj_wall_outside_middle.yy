@@ -28,7 +28,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "outside",
-    "path": "folders/Objects/wall/outside.yy",
+    "path": "folders/Objects/room_game/wall/outside.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_wall_outside_middle",

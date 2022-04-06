@@ -1,57 +1,51 @@
-//Velocidade de movimento
+#region SETTING VARIABLES
+//MOVEMENT SPEED
 vel_default = 3;
 vel = vel_default;
 
-//Diz se o player está no controle no momento
+//CHECKS IF THE PLAYER IS CURRENTLY IN CONTROL
 has_control = true;
 
-//Pontos de vida do player
-player_hp = 3;		//padrão: 3
+//PLAYER HIT POINTS
+player_hp = 3;	//DEFAULT: 3
 
-//Variável que controla o alfa do player
+//VARIABLE THAT CONTROLS THE PLAYER'S ALPHA
 num = 1;
+#endregion
 
-
-//Método de movimento do player
+//PLAYER MOVEMENT METHOD
 player_move = function() {
-	//Checa a última movimentação do player
-	var last_key_right = keyboard_lastkey == ord("D");
-	var last_key_left = keyboard_lastkey == ord("A");
-	var last_key_down = keyboard_lastkey == ord("S");
-	var last_key_up = keyboard_lastkey == ord("W");
-	
+	//CHECK THE PLAYER'S LAST MOVE
+	var last_key_right	= keyboard_lastkey == ord("D") || keyboard_lastkey == vk_right;
+	var last_key_left	= keyboard_lastkey == ord("A") || keyboard_lastkey == vk_left;
+	var last_key_down	= keyboard_lastkey == ord("S") || keyboard_lastkey == vk_down;
+	var last_key_up		= keyboard_lastkey == ord("W") || keyboard_lastkey == vk_up;
 
-	//Distância até o objeto de colisão
+
+	//DISTANCE TO THE COLLISION OBJECT
 	var colliding_distance = 10;
 	
-	//Objeto a se checar a colisão
+	//OBJECT TO CHECK FOR COLLISION
 	var collision_object = obj_collision;
 	
-	//Checa se há espaço para o player virar se no modo automático
-	//A distância de colisão é maior porque o propósito é ser usado para checar
-	//se o player pode virar, e não se deve interromper o seu movimento
-	var right_has_space = !place_meeting(x+colliding_distance, y, collision_object);
-	var left_has_space = !place_meeting(x-colliding_distance, y, collision_object);
-	var down_has_space = !place_meeting(x, y+colliding_distance, collision_object);
-	var up_has_space = !place_meeting(x, y-colliding_distance, collision_object);
+	//CHECKS IF THERE IS ROOM FOR THE PLAYER TO MOVE AUTOMATICALLY
+	var right_has_space	= !place_meeting(x+colliding_distance, y, collision_object);
+	var left_has_space	= !place_meeting(x-colliding_distance, y, collision_object);
+	var down_has_space	= !place_meeting(x, y+colliding_distance, collision_object);
+	var up_has_space	= !place_meeting(x, y-colliding_distance, collision_object);
 
-
-	//Checa se o player está colidindo
+	//CHECKS IF THE PLAYER IS COLLIDING
 	var colliding = place_meeting(x+hspeed, y+vspeed, collision_object);
 	
-	//image_xscale = vel_default/vel;
-	//image_yscale = vel_default/vel;
-	
-	//Se houver colisão, a movimentação do player é interrompida
+	//IF THERE IS A COLLISION, THE PLAYER'S MOVEMENT IS STOPPED
 	if (colliding) {
 		vspeed = 0;
 		hspeed = 0;
 	}
 	else {
-		//Caso não haja colisão, checa pra qual direção player quer se movimentar
-		//e se há espaço para virar.
-		//O bloco vai ficar fazendo esse teste, e tentará virar para a última
-		//direção ativada, a não ser que o player mude de direção
+		//IF THERE IS NO COLLISION, CHECK WHICH DIRECTION THE PLAYER WANTS TO MOVE AND IF THERE IS ROOM TO TURN.
+		//THE BLOCK WILL KEEP DOING THIS TEST, AND WILL TRY TO TURN TO THE LAST ACTIVATED DIRECTION,
+		//UNLESS THE PLAYER CHANGES DIRECTION.
 		if (last_key_right) and (right_has_space) {
 			vspeed = 0;
 			hspeed = vel;
@@ -71,12 +65,12 @@ player_move = function() {
 	}
 	
 	
-	//Controla a direção do sprite
+	//CONTROLS SPRITE DIRECTION
 	var facing_up, facing_left, facing_down, facing_right;
-	facing_up = 90;
-	facing_left = 180;
-	facing_down = 270;
-	facing_right = 0;
+	facing_up		= 90;
+	facing_left		= 180;
+	facing_down		= 270;
+	facing_right	= 0;
 	
 	if (vspeed < 0) {
 		image_angle = facing_up;
@@ -97,42 +91,50 @@ player_move = function() {
 	
 
 	//UNSTUCK PLAYER
-	if (floor(x) != x || floor(y) != y) {
-		x = floor(x);
-		y = floor(y);
+	var map_grid = 32;
+	
+	if (place_meeting(x, y, collision_object) && hspeed == 0 && vspeed == 0) {
+		var colliding_wall_x = place_meeting(ceil(x/map_grid)*map_grid, y, collision_object);
+		var colliding_wall_y = place_meeting(x, (ceil(y/map_grid)*map_grid)-16, collision_object);
+		
+		var valid_teleport_x = !colliding_wall_x;
+		var valid_teleport_y = !colliding_wall_y;
+		
+		if (valid_teleport_x) x = ceil(x/map_grid)*map_grid;
+		else x = (ceil(x/map_grid)*map_grid)-map_grid;
+		
+		if (valid_teleport_y) y = (ceil(y/map_grid)*map_grid)-16;
+		else y = (ceil(y/map_grid)*map_grid)-16;
 	}
 }
 
-
-//Método para interromper o movimento do player
+//METHOD TO STOP PLAYER MOVEMENT
 player_stop = function() {
-	//Checa o input do player
-	var key_right = keyboard_check(ord("D"));
-	var key_left = keyboard_check(ord("A"));
-	var key_down = keyboard_check(ord("S"));
-	var key_up = keyboard_check(ord("W"));
+	//CHECK PLAYER INPUT
+	var key_right	= keyboard_check(ord("D"))	|| keyboard_check(vk_right);
+	var key_left	= keyboard_check(ord("A"))	|| keyboard_check(vk_left);
+	var key_down	= keyboard_check(ord("S"))	|| keyboard_check(vk_down);
+	var key_up		= keyboard_check(ord("W"))	|| keyboard_check(vk_up);
 	
-	//Checa se teclas em direções opostas estão sendo pressionadas
+	//CHECKS IF KEYS IN OPPOSITE DIRECTIONS ARE BEING PRESSED
 	var stop_x = key_right and key_left;
 	var stop_y = key_down and key_up;
 	var stop = stop_x or stop_y;
 	
-	//Caso estejam, interrompe o movimento do player
+	//IF SO, INTERRUPTS THE PLAYER'S MOVEMENT
 	if (stop) {
 		has_control = false;
 
 		hspeed = 0;
 		vspeed = 0;
 		
-		//Reseta a última tecla armazenada em lastkey
+		//RESETS THE LAST KEY PRESSED
 		keyboard_lastkey = -1;
 		
-		//Ao final, devolve o controle ao jogador, que pode novamente se movimentar
+		//AT THE END, IT RETURNS CONTROL TO THE PLAYER
 		has_control = true;
 	}
 }
-
-	
 
 #region PLAYER HITTING ENEMIES
 //HIT ANIMATION FLAG
@@ -144,12 +146,13 @@ player_invincible = false;
 //CONTROL IF PLAYER IS IN GHOST MODE
 ghost_mode = false;
 
+
 player_hit = function() {
 	if (player_hp > 0 && !ghost_mode) {
 		player_hp--;
 		
 		//CREATE ANIMATION SEQUENCE WHEN PLAYER LOSES LIFE
-		player_seq_hit = layer_sequence_create("Player", x, y, seq_player_hurt);
+		player_seq_hit = layer_sequence_create("Sequence_Player", x, y, seq_player_hurt);
 		run_player_hit_sequence = true;
 
 		layer_sequence_xscale(player_seq_hit, image_xscale);
@@ -163,14 +166,14 @@ player_hit = function() {
 		//CREATE SEQUENCE ANIMATION ON THE HUD
 		var x_text = (obj_controller.draw_text_xl+20)+obj_controller.temp_life_points_x*player_hp;
 		var y_text = (obj_controller.draw_text_y+195);
-		layer_sequence_create("Player", x_text, y_text, seq_life_point_less);
+		layer_sequence_create("Sequence_Player", x_text, y_text, seq_life_point_less);
 		
 		//DESTROY ENEMY INSTANCE
 		with (other) instance_destroy();
 	}
 	else if (player_invincible) {	
 		//CREATE ANIMATION SEQUENCE WHEN PLAYER HIT ENEMY BUT IS IN INVINCIBLE MODE
-		player_seq_hit = layer_sequence_create("Player", x, y, seq_player_invincible);
+		player_seq_hit = layer_sequence_create("Sequence_Player", x, y, seq_player_invincible);
 		run_player_hit_sequence = true;
 		
 		layer_sequence_xscale(player_seq_hit, image_xscale);
@@ -186,7 +189,7 @@ player_hit = function() {
 }
 
 player_hit_sequence = function() {
-	if (run_player_hit_sequence and player_hp > 0) {
+	if (run_player_hit_sequence && player_hp > 0) {
 		//LAYER SEQUENCE FOLLOWS THE PLAYER
 		layer_sequence_x(player_seq_hit, x);
 		layer_sequence_y(player_seq_hit, y);
@@ -202,9 +205,9 @@ player_hit_sequence = function() {
 	
 		//WHEN THE SEQUENCE IS FINISHED, RESTORE ALL PREVIOUS VALUES
 		if (layer_sequence_is_finished(player_seq_hit)) {
-			layer_sequence_destroy(player_seq_hit);
+			layer_destroy("Sequence_Player");
+			layer_create(1,"Sequence_Player");
 			run_player_hit_sequence = false;
-		
 			image_alpha = 1;
 			
 			if not(player_invincible) {

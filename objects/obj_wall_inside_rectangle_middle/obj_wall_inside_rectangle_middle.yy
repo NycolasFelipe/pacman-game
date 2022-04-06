@@ -30,7 +30,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "inside",
-    "path": "folders/Objects/wall/inside.yy",
+    "path": "folders/Objects/room_game/wall/inside.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_wall_inside_rectangle_middle",

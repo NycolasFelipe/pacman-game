@@ -25,7 +25,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "powerups",
-    "path": "folders/Objects/powerups.yy",
+    "path": "folders/Objects/room_game/powerups.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_powerup",

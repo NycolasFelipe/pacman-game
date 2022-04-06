@@ -70,7 +70,7 @@
   "nineSlice": null,
   "parent": {
     "name": "background",
-    "path": "folders/Sprites/background.yy",
+    "path": "folders/Sprites/room_game/background.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_safe_area",

@@ -72,7 +72,7 @@
   "nineSlice": null,
   "parent": {
     "name": "wall",
-    "path": "folders/Sprites/wall.yy",
+    "path": "folders/Sprites/room_game/wall.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_wall_rectangle_end",

@@ -8,14 +8,14 @@
   "collisionTolerance": 0,
   "swfPrecision": 2.525,
   "bbox_left": 0,
-  "bbox_right": 1186,
-  "bbox_top": 0,
-  "bbox_bottom": 95,
+  "bbox_right": 600,
+  "bbox_top": 15,
+  "bbox_bottom": 107,
   "HTile": false,
   "VTile": false,
   "For3D": false,
-  "width": 1187,
-  "height": 96,
+  "width": 601,
+  "height": 122,
   "textureGroupId": {
     "name": "Default",
     "path": "texturegroups/Default",
@@ -24,9 +24,9 @@
   "gridX": 0,
   "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"60be192c-347e-4da9-a974-a767d9f7ee5b","path":"sprites/spr_game_over_message/spr_game_over_message.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"60be192c-347e-4da9-a974-a767d9f7ee5b","path":"sprites/spr_game_over_message/spr_game_over_message.yy",},"LayerId":{"name":"7d79f342-d109-4efc-9e63-a29a8f33afed","path":"sprites/spr_game_over_message/spr_game_over_message.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"spr_game_over_message","path":"sprites/spr_game_over_message/spr_game_over_message.yy",},"resourceVersion":"1.0","name":"60be192c-347e-4da9-a974-a767d9f7ee5b","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"bcfb3a0f-94de-49fe-85a8-483a87cf83f4","path":"sprites/spr_game_over_message/spr_game_over_message.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"bcfb3a0f-94de-49fe-85a8-483a87cf83f4","path":"sprites/spr_game_over_message/spr_game_over_message.yy",},"LayerId":{"name":"052d6c7a-00e4-4a0a-b0cf-3f9e049b7417","path":"sprites/spr_game_over_message/spr_game_over_message.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"spr_game_over_message","path":"sprites/spr_game_over_message/spr_game_over_message.yy",},"resourceVersion":"1.0","name":"bcfb3a0f-94de-49fe-85a8-483a87cf83f4","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
     "spriteId": {"name":"spr_game_over_message","path":"sprites/spr_game_over_message/spr_game_over_message.yy",},
@@ -41,7 +41,7 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"59833b1e-3406-45b7-b34a-4e2d495b3902","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"60be192c-347e-4da9-a974-a767d9f7ee5b","path":"sprites/spr_game_over_message/spr_game_over_message.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"094a998e-8d83-41b5-94fb-a5e1b278e081","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"bcfb3a0f-94de-49fe-85a8-483a87cf83f4","path":"sprites/spr_game_over_message/spr_game_over_message.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack","modifiers":[],},
     ],
     "visibleRange": null,
@@ -54,8 +54,8 @@
     "backdropHeight": 768,
     "backdropXOffset": 0.0,
     "backdropYOffset": 0.0,
-    "xorigin": 593,
-    "yorigin": 48,
+    "xorigin": 300,
+    "yorigin": 61,
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_game_over_message","path":"sprites/spr_game_over_message/spr_game_over_message.yy",},
@@ -65,12 +65,12 @@
     "resourceType": "GMSequence",
   },
   "layers": [
-    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"7d79f342-d109-4efc-9e63-a29a8f33afed","tags":[],"resourceType":"GMImageLayer",},
+    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"052d6c7a-00e4-4a0a-b0cf-3f9e049b7417","tags":[],"resourceType":"GMImageLayer",},
   ],
   "nineSlice": null,
   "parent": {
     "name": "text",
-    "path": "folders/Sprites/text.yy",
+    "path": "folders/Sprites/room_game/text.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_game_over_message",

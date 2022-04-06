@@ -28,7 +28,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "etc",
-    "path": "folders/Objects/etc.yy",
+    "path": "folders/Objects/room_game/etc.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_padlock",

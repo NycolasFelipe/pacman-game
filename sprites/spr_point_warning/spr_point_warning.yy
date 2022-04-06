@@ -94,7 +94,7 @@
   "nineSlice": null,
   "parent": {
     "name": "points",
-    "path": "folders/Sprites/points.yy",
+    "path": "folders/Sprites/room_game/points.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_point_warning",

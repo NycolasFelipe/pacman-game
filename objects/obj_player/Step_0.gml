@@ -1,9 +1,6 @@
-/// @desc movimentação do player
-if (has_control) {
-	player_move();
-}
+if (has_control) player_move();
 
-//Checa se o player está tentando interromper o movimento
+//CHECKS IF THE PLAYER IS TRYING TO STOP THE MOVEMENT
 player_stop();
 
 //MANAGE PLAYER HIT SEQUENCE

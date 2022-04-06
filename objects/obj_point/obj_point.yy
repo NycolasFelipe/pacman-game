@@ -25,7 +25,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "points",
-    "path": "folders/Objects/points.yy",
+    "path": "folders/Objects/room_game/points.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_point",

@@ -86,7 +86,7 @@
   "nineSlice": null,
   "parent": {
     "name": "enemy",
-    "path": "folders/Sprites/enemy.yy",
+    "path": "folders/Sprites/room_game/enemy.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_enemy_red",

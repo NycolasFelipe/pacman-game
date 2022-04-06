@@ -6,24 +6,34 @@ moving_audio_control = false;
 moving_music_control = false;
 moving_effects_control = false;
 
+background_music = [
+	snd_game_start,
+	snd_game_start_screen,
+	snd_background_music,
+	snd_game_over_music,
+];
+background_music_length = array_length(background_music);
+
 effects_sound = [
-snd_player_eating,
-snd_powerup_invincible,
-snd_powerup_speed,
-snd_powerup_ghost,
-snd_life_point_more,
-snd_life_point_less,
-snd_player_spotted,
-snd_point, 
-snd_portal,
-snd_game_over,
-snd_game_over_music
+	snd_player_level_up,
+	snd_menu_moving,
+	snd_menu_select,
+	snd_player_eating,
+	snd_powerup_invincible,
+	snd_powerup_speed,
+	snd_powerup_ghost,
+	snd_life_point_more,
+	snd_life_point_less,
+	snd_player_spotted,
+	snd_point, 
+	snd_portal,
+	snd_game_over,
 ];
 effects_sound_length = array_length(effects_sound);
 #endregion
 
 
-#region SETTINGS AUDIO BUTTON'S VARIABLES
+#region SETTING AUDIO BUTTON'S VARIABLES
 //AUDIO BUTTON
 AUDIO = spr_button_audio;
 AUDIO_subimage = 0;
@@ -54,7 +64,7 @@ AUDIO_CONTROL_yscale = 0;
 #endregion
 
 
-#region SETTINGS MUSIC BUTTON'S VARIABLES
+#region SETTING MUSIC BUTTON'S VARIABLES
 //MUSIC BUTTON
 MUSIC = spr_button_music;
 MUSIC_subimage = 0;
@@ -88,7 +98,7 @@ MUSIC_CONTROL_yscale = 0;
 #endregion
 
 
-#region SETTINGS EFFECTS BUTTON'S VARIABLES
+#region SETTING EFFECTS BUTTON'S VARIABLES
 //EFFECTS BUTTON
 EFFECTS = spr_button_effects;
 EFFECTS_subimage = 0;
@@ -122,11 +132,69 @@ EFFECTS_CONTROL_yscale = 0;
 #endregion
 
 
+#region UPDATING SOUND MANAGER POSITION
+updating_position = function() {
+	var changed_position = AUDIO_y != y;
+	
+	if (changed_position) {
+		//UPDATING AUDIO BUTTON POSITION
+		AUDIO_x = x;
+		AUDIO_y = y;
+	
+		AUDIO_SLIDE_x = AUDIO_x;
+		AUDIO_SLIDE_y = AUDIO_y+(AUDIO_height*1.8);
+	
+		AUDIO_CONTROL_x = AUDIO_SLIDE_x;
+		AUDIO_CONTROL_y = AUDIO_SLIDE_y+AUDIO_SLIDE_height;
+	
+		//UPDATING MUSIC BUTTON POSITION
+		MUSIC_x = AUDIO_x-AUDIO_width*2;
+		MUSIC_y = AUDIO_y;
+	
+		MUSIC_SLIDE_x = MUSIC_x;
+		MUSIC_SLIDE_x0 = MUSIC_x;
+		MUSIC_SLIDE_xf = MUSIC_SLIDE_x-MUSIC_width;
+		MUSIC_SLIDE_y = AUDIO_SLIDE_y;
+	
+		MUSIC_CONTROL_x = MUSIC_SLIDE_x;
+		MUSIC_CONTROL_x0 = MUSIC_SLIDE_x;
+		MUSIC_CONTROL_xf = MUSIC_SLIDE_x-MUSIC_width;
+		MUSIC_CONTROL_y = MUSIC_SLIDE_y+MUSIC_SLIDE_height;
+	
+		//UPDATING EFFECTS BUTTON POSITION
+		EFFECTS_x = MUSIC_x-(AUDIO_width*3);
+		EFFECTS_y = AUDIO_y;
+	
+		EFFECTS_SLIDE_x = EFFECTS_x;
+		EFFECTS_SLIDE_x0 = EFFECTS_x;
+		EFFECTS_SLIDE_xf = EFFECTS_SLIDE_x-EFFECTS_width;
+		EFFECTS_SLIDE_y = AUDIO_SLIDE_y;
+	
+		EFFECTS_CONTROL_x = EFFECTS_SLIDE_x;
+		EFFECTS_CONTROL_x0 = EFFECTS_SLIDE_x;
+		EFFECTS_CONTROL_xf = EFFECTS_SLIDE_x-EFFECTS_width;
+		EFFECTS_CONTROL_y = EFFECTS_SLIDE_y+EFFECTS_SLIDE_height;
+	
+		temp_audio_control_y = AUDIO_SLIDE_y;
+		temp_music_control_y = MUSIC_SLIDE_y;
+		temp_effects_control_y = EFFECTS_SLIDE_y;
+	}
+	
+	//LOADING SOUND MANAGER SETTINGS
+	load_sound_manager();
+}
+#endregion
+
+
 #region OTHER VARIABLES
 temp_audio_control_y = AUDIO_SLIDE_y;
 temp_music_control_y = MUSIC_SLIDE_y;
 temp_effects_control_y = EFFECTS_SLIDE_y;
 #endregion
+
+
+//LOADING SOUND MANAGER SETTINGS
+load_sound_manager();
 
 
 draw_sound_menu = function() {
@@ -162,7 +230,7 @@ draw_sound_menu = function() {
 
 
 checking_mouse = function() {
-	//Iniciando variÃ¡veis
+	//SETTING VARIABLES
 	menu_opened = alarm[0] != -1;
 	scale = 0;
 	
@@ -225,21 +293,15 @@ checking_mouse = function() {
 		if (clicking_audio_control) moving_audio_control = true;
 
 		//MOVING CONTROL
-		if (moving_audio_control) {
-			AUDIO_CONTROL_y = clamp(mouse_y, AUDIO_SLIDE_y, AUDIO_SLIDE_y+(AUDIO_SLIDE_height*2));
-			moving_audio_control = false;
-		}
-	
+		if (moving_audio_control) AUDIO_CONTROL_y = clamp(mouse_y, AUDIO_SLIDE_y, AUDIO_SLIDE_y+(AUDIO_SLIDE_height*2));
+
 	
 		//MOVING MUSIC'S CONTROL
 		var clicking_music_control = (mouse_left_check || mouse_left_pressed) && mouse_music_slide && !mouse_music;
 		if (clicking_music_control) moving_music_control = true;
 	
 		//MOVING CONTROL
-		if (moving_music_control) {
-			MUSIC_CONTROL_y = clamp(mouse_y, MUSIC_SLIDE_y, MUSIC_SLIDE_y+(MUSIC_SLIDE_height*2));
-			moving_music_control = false;
-		}
+		if (moving_music_control) MUSIC_CONTROL_y = clamp(mouse_y, MUSIC_SLIDE_y, MUSIC_SLIDE_y+(MUSIC_SLIDE_height*2));
 	
 	
 		//MOVING EFFECT'S CONTROL
@@ -247,10 +309,7 @@ checking_mouse = function() {
 		if (clicking_effects_control) moving_effects_control = true;
 	
 		//MOVING CONTROL
-		if (moving_effects_control) {
-			EFFECTS_CONTROL_y = clamp(mouse_y, EFFECTS_SLIDE_y, EFFECTS_SLIDE_y+(EFFECTS_SLIDE_height*2));
-			moving_effects_control = false;
-		}
+		if (moving_effects_control) EFFECTS_CONTROL_y = clamp(mouse_y, EFFECTS_SLIDE_y, EFFECTS_SLIDE_y+(EFFECTS_SLIDE_height*2));
 		
 		
 		//ANIMATING BUTTON AUDIO - CONTROL
@@ -320,25 +379,39 @@ change_volume = function() {
 	audio_volume = 1-audio_value;
 	music_volume = 1-music_value;	
 	effects_volume = 1-effects_value;
-
-	audio_sound_gain(snd_background_music, music_volume*audio_volume*0.1, 0);	//0.1 is there for lowering the background music volume
+	
+	for (var i = 0; i < background_music_length; i++) {
+		var music = background_music[i];
+		var audio_multiplier = 1;
+		
+		switch (music) {
+			case snd_game_start: audio_multiplier = 0.7 break;
+			case snd_game_start_screen: audio_multiplier = 0.8 break;
+			case snd_background_music: audio_multiplier = 0.8 break;
+			case snd_game_over_music: audio_multiplier = 0.6 break;
+		}
+		
+		audio_sound_gain(music, music_volume*audio_volume*audio_multiplier, 0);
+	}
 	
 	for (var i = 0; i < effects_sound_length; i++) {
 		var effect = effects_sound[i];
 		var audio_multiplier = 1;
 		
 		switch (effect) {
-			case snd_player_eating: audio_multiplier = 0.2 break;
-			case snd_powerup_invincible: audio_multiplier = 0.1 break;
-			case snd_powerup_speed: audio_multiplier = 0.2 break;
-			case snd_powerup_ghost: audio_multiplier = 0.2 break;
-			case snd_life_point_more: audio_multiplier = 0.1 break;
-			case snd_life_point_less: audio_multiplier = 1 break;
-			case snd_player_spotted: audio_multiplier = 0.3 break;
-			case snd_point: audio_multiplier = 0.05 break;
-			case snd_portal: audio_multiplier = 0.6 break;
-			case snd_game_over: audio_multiplier = 1 break;
-			case snd_game_over_music: audio_multiplier = 0.05;
+			case snd_player_level_up: audio_multiplier = 0.4 break;
+			case snd_menu_moving: audio_multiplier = 0.2 break;
+			case snd_menu_select: audio_multiplier = 0.3 break;
+			case snd_player_eating: audio_multiplier = 0.5 break;
+			case snd_powerup_invincible: audio_multiplier = 0.4 break;
+			case snd_powerup_speed: audio_multiplier = 0.6 break;
+			case snd_powerup_ghost: audio_multiplier = 0.6 break;
+			case snd_life_point_more: audio_multiplier = 0.3 break;
+			case snd_life_point_less: audio_multiplier = 2 break;
+			case snd_player_spotted: audio_multiplier = 1 break;
+			case snd_point: audio_multiplier = 0.1 break;
+			case snd_portal: audio_multiplier = 1.7 break;
+			case snd_game_over: audio_multiplier = 0.8 break;
 		}
 		
 		audio_sound_gain(effect, effects_volume*audio_volume*audio_multiplier, 0);
@@ -373,12 +446,25 @@ change_volume = function() {
 		temp_effects_control_y = EFFECTS_CONTROL_y;
 		EFFECTS_CONTROL_y = EFFECTS_SLIDE_y+EFFECTS_SLIDE_height*2;
 	}
+	
+	
+	//SAVING SOUND MANAGER SETTINGS
+	var moving_control	= moving_audio_control || moving_music_control || moving_effects_control;
+	var mouse_pressed	= mouse_audio_pressed || mouse_music_pressed || mouse_effects_pressed;
+	
+	if (moving_control || mouse_pressed) {
+		moving_audio_control	= false;
+		moving_music_control	= false;
+		moving_effects_control	= false;
+		
+		save_sound_manager();
+	}
 }
 
 
 checking_icon = function() {
 	//CHECKING AUDIO VOLUME
-	if (audio_volume == 0) {	//0 - sound on, 1 - sound off
+	if (audio_volume == 0) {	//SOUND ON - 0, SOUND OFF - 1
 		AUDIO_subimage = 1;
 		MUSIC_subimage = 1;
 		EFFECTS_subimage = 1;

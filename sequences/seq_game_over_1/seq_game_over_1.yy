@@ -184,8 +184,8 @@
   "eventToFunction": {},
   "eventStubScript": null,
   "parent": {
-    "name": "Sequences",
-    "path": "folders/Sequences.yy",
+    "name": "room_game",
+    "path": "folders/Sequences/room_game.yy",
   },
   "resourceVersion": "1.4",
   "name": "seq_game_over_1",

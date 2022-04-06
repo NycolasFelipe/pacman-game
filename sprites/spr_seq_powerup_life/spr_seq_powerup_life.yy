@@ -149,7 +149,7 @@
   "nineSlice": null,
   "parent": {
     "name": "powerups",
-    "path": "folders/Sprites/powerups.yy",
+    "path": "folders/Sprites/room_game/powerups.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_seq_powerup_life",

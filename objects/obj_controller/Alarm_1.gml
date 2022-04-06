@@ -1,1 +1,1 @@
-/// @desc tempo de spawn dos inimigos
+//ENEMIES SPAWN TIME

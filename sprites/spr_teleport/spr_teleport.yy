@@ -70,7 +70,7 @@
   "nineSlice": null,
   "parent": {
     "name": "teleport",
-    "path": "folders/Sprites/teleport.yy",
+    "path": "folders/Sprites/room_game/teleport.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_teleport",

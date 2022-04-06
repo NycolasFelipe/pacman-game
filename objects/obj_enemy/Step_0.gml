@@ -1,13 +1,11 @@
-/// @desc movimento do inimigo
-
-//Diz se o inimigo está dentro da área de spawn
+//CHECKS IF THE ENEMY IS INSIDE THE SPAWN AREA
 inside_spawn_area = place_meeting(x, y, obj_spawn_area);
 
 if (inside_spawn_area) {
-	//Controla o comportamento do inimigo dentro da área de spawn
+	//CONTROLS ENEMY BEHAVIOR WITHIN THE SPAWN AREA
 	enemy_spawn_behavior(id, walk_speed, leaving_area, map_grid);
 }
-//Só poderá mover-se automaticamente se não estiver dentro da área de spawn
+//IT WILL ONLY BE ABLE TO MOVE AUTOMATICALLY IF IT IS NOT INSIDE THE SPAWN AREA
 else if not(global.game_is_paused) {
 	enemy_move();
 }

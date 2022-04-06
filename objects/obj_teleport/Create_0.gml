@@ -1,2 +1,1 @@
-/// @desc armazena a sua posição
-x_pos = x
+x_pos = x;

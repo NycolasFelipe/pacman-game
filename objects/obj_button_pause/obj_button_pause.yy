@@ -7,10 +7,7 @@
   "visible": true,
   "spriteMaskId": null,
   "persistent": false,
-  "parentObjectId": {
-    "name": "obj_button",
-    "path": "objects/obj_button/obj_button.yy",
-  },
+  "parentObjectId": null,
   "physicsObject": false,
   "physicsSensor": false,
   "physicsShape": 1,
@@ -31,7 +28,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "buttons",
-    "path": "folders/Objects/buttons.yy",
+    "path": "folders/Objects/room_game/buttons.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_button_pause",

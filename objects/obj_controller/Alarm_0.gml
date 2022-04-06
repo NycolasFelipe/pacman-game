@@ -1,7 +1,7 @@
-/// @desc tempo de spawn dos pontos
+//POINTS SPAWN
 
-//Cria os pontos depois de 1 segundo
+//CREATE THE POINTS AFTER 1 SECOND
 create_points()
 
-//Permite o player subir de level novamente
+//ALLOWS PLAYER BEING ABLE TO LEVEL UP AGAIN
 leveled_up = false

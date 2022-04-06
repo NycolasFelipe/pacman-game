@@ -1,12 +1,9 @@
-/// @desc destrói o objeto
-
-//Adiciona um ponto ao placar
+//ADD POINT TO THE SCOREBOARD
 obj_controller.points += 10;
 
-
-//Destrói a instância do ponto
+//DESTROY THE POINT INSTANCE
 with(other) instance_destroy();
 
-//Toca o efeito sonoro ao ser destruído
+//PLAYS SOUND EFFECT WHEN DESTROYED
 var play_sound = obj_controller.play_sound;
 if (play_sound) audio_play_sound(snd_point, 1, false);

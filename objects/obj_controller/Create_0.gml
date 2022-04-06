@@ -1,6 +1,7 @@
-/// @desc CONTROL THE MOST IMPORTANT FUNCTIONS IN THE GAME
-
 #region SETTING VARIABLES
+//GLOBAL PAUSE VARIABLE
+global.game_is_paused = false;
+
 //CURRENTLY PLAYER LEVEL
 player_level = 1;	
 
@@ -27,8 +28,12 @@ play_music = true;
 //ACTIVATE/DEACTIVATE SOUND EFFECTS
 play_sound = true;
 
-//PLAYS BACKGROUND MUSIC
-if (play_music) audio_play_sound(snd_background_music, 1, true);
+//BACKGROUND MUSIC TIME
+if not(audio_is_playing(snd_background_music)) background_music_playing = false;
+else background_music_playing = true;
+
+background_music_delay = 120;
+background_music_time = background_music_delay;
 #endregion
 
 #region SETTING PORTAL VARIABLES
@@ -43,8 +48,9 @@ right_portal_x	= right_portal.x-64;
 player_teleporting = false;
 
 //INITATING PORTAL SEQUENCES
-right_portal_sequence = layer_sequence_create("Sequence_Portal", right_teleport.x, right_teleport.y, seq_portal);
-left_portal_sequence = layer_sequence_create("Sequence_Portal", left_teleport.x, left_teleport.y, seq_portal);
+right_portal_sequence	= layer_sequence_create("Sequence_Portal", right_teleport.x, right_teleport.y, seq_portal);
+left_portal_sequence	= layer_sequence_create("Sequence_Portal", left_teleport.x, left_teleport.y, seq_portal);
+
 layer_sequence_xscale(left_portal_sequence, -1);
 
 layer_sequence_pause(right_portal_sequence);
@@ -53,58 +59,31 @@ layer_sequence_pause(left_portal_sequence);
 portal_angle = 0;
 #endregion
 
+#region DRAWING WALL COLORS
+//SETTING VARIABLES
+wall_color_delay_default	= 120;
+wall_color_delay			= wall_color_delay_default;
+wall_color_time				= wall_color_delay;
+
+wall_set = [
+	[c_navy,	c_yellow],
+	[c_red,		c_aqua],
+	[c_blue,	c_silver],
+	[c_fuchsia,	c_green],
+];
+wall_set_length = array_length(wall_set);
+
+wall_color_index = 0;
+wall_color = c_white;
+#endregion
+
 #region DRAWING INTERFACE
-#region DRAWING INTERFACE - SETTING VARIABLES
+#region SETTING VARIABLES
 draw_text_xl	= obj_camera.x-display_get_width()/1.9;		//DRAW TEXT X - LEFT
 draw_text_xr	= obj_camera.x+display_get_width()/1.9;		//DRAW TEXT X - RIGHT
 draw_text_y		= obj_camera.y-display_get_height()/1.9;	//DRAW TEXT Y - TOP
 draw_text_yb	= obj_camera.y+display_get_height()/1.9;	//DRAW TEXT Y - BOTTOM
 temp_life_points_x = 45;
-#endregion
-
-#region FULLSCREEN MODE
-fullscreen_sprite	= spr_button_fullscreen;
-fullscreen_width	= sprite_get_width(fullscreen_sprite);
-fullscreen_height	= sprite_get_height(fullscreen_sprite);
-fullscreen_index	= 0;
-fullscreen_xscale	= 1;
-fullscreen_yscale	= 1;
-fullscreen_newscale	= 1.2;
-
-fullscreen_x = draw_text_xl;
-fullscreen_y = draw_text_y;
-
-fullscreen_mode = function() {
-	draw_sprite_ext(fullscreen_sprite, fullscreen_index, fullscreen_x, fullscreen_y, fullscreen_xscale, fullscreen_yscale, image_angle, image_blend, image_alpha);
-	
-	var mouse_fullscreen_x = fullscreen_x <= mouse_x && mouse_x <= fullscreen_x+fullscreen_width;
-	var mouse_fullscreen_y = fullscreen_y <= mouse_y && mouse_y <= fullscreen_y+fullscreen_height;
-	var mouse_fullscreen = mouse_fullscreen_x && mouse_fullscreen_y;
-	
-	if (mouse_fullscreen) {
-		fullscreen_xscale = fullscreen_newscale;
-		fullscreen_yscale = fullscreen_newscale;
-	}
-	else {
-		fullscreen_xscale = 1;
-		fullscreen_yscale = 1;
-	}
-	
-	var mouse_pressed = mouse_check_button_pressed(mb_left);
-	if (mouse_pressed && mouse_fullscreen) {
-		switch(fullscreen_index) {
-			case 0: 
-				fullscreen_index = 1; 
-				window_set_fullscreen(true);
-			break;
-			
-			case 1: 
-				fullscreen_index = 0;
-				window_set_fullscreen(false);
-			break;
-		}
-	}
-}
 #endregion
 
 #region PAUSE BUTTON
@@ -118,6 +97,7 @@ pause_index		= 0;
 pause_xscale	= 1;
 pause_yscale	= 1;
 pause_newscale	= 1.2;
+pause_off = false;
 
 pause_x = draw_text_xr-(pause_width/2);
 pause_y = draw_text_y+(pause_height/2);
@@ -186,90 +166,19 @@ pause_button = function() {
 }
 #endregion
 
-#region DEV MODE
-dev_mode		= false;
-dev_sprite		= spr_button_dev;
-dev_width		= sprite_get_width(dev_sprite);
-dev_height		= sprite_get_height(dev_sprite);
-dev_index		= 0;
-dev_xscale		= 1;
-dev_yscale		= 1;
-dev_newscale	= 1.2;
-dev_alpha		= 0.2;
-
-dev_x = draw_text_xr-(dev_width/2);
-dev_y = draw_text_yb-(dev_height/2);
-
-//LAYER IDs
-dev_collision			= layer_get_id("Collision");
-dev_background_filter	= layer_get_id("Background_Filter");
-dev_inside_wall			= layer_get_id("Inside_Wall");
-dev_outside_wall		= layer_get_id("Outside_Wall");
-
-dev_button = function() {
-	draw_sprite_ext(dev_sprite, dev_index, dev_x, dev_y, dev_xscale, dev_yscale, image_angle, image_blend, dev_alpha);
-	
-	var mouse_dev_x = dev_x-(dev_width/2) <= mouse_x && mouse_x <= dev_x+(dev_width/2);
-	var mouse_dev_y = dev_y-(dev_height/2) <= mouse_y && mouse_y <= dev_y+(dev_height/2);
-	var mouse_dev = mouse_dev_x & mouse_dev_y;
-	
-	if (mouse_dev) {
-		dev_xscale = dev_newscale;
-		dev_yscale = dev_newscale;
-	}
-	else {
-		dev_xscale = 1;
-		dev_yscale = 1;
-	}
-	
-	var mouse_pressed = mouse_check_button_pressed(mb_left);
-	if (mouse_pressed && mouse_dev) {
-		switch(dev_index) {
-			//DEV MODE ON
-			case 0:
-				dev_mode = true;
-				dev_index = 1;
-				dev_alpha = 1;
-				
-				layer_set_visible(dev_collision, true);
-				layer_set_visible(dev_background_filter, false);
-				layer_set_visible(dev_inside_wall, false);
-				layer_set_visible(dev_outside_wall, false);
-			break;
-			
-			//DEV MODE OFF
-			case 1:
-				dev_mode = false;
-				dev_index = 0;
-				dev_alpha = 0.2;
-				
-				layer_set_visible(dev_collision, false);
-				layer_set_visible(dev_background_filter, true);
-				layer_set_visible(dev_inside_wall, true);
-				layer_set_visible(dev_outside_wall, true);
-			break;
-		}
-	}
-}
+#region PAUSE MENU
+//CREATING MENU OBJECT
+instance_create_layer(0, 0, "Menu", obj_menu);
 #endregion
 
-#region SOUND MANAGER
-sound_manager_width	= sprite_get_width(spr_button_audio);
-sound_manager_height = sprite_get_height(spr_button_audio);
-sound_manager_x = draw_text_xr-(sound_manager_width/2);
-sound_manager_y = draw_text_y+(sound_manager_height/2)+60;
-
-instance_create_layer(sound_manager_x, sound_manager_y, "Buttons", obj_sound_manager);
-#endregion
-
-//DRAWING INTERFACE
+//DRAWING INTERFACE FUNCTION
 draw_interface = function() {
 	draw_txt = [
-		[draw_text_xl, draw_text_y+30*2, fnt_main, "PONTOS:"],
-		[draw_text_xl, draw_text_y+30*3, fnt_points, string(points)],
-		[draw_text_xl, draw_text_y+30*5, fnt_main, "VIDA:"],
-		[draw_text_xl, draw_text_y+30*9, fnt_main, "LEVEL:"],
-		[draw_text_xl, draw_text_y+30*10, fnt_points, string(player_level)]
+		[draw_text_xl, draw_text_y+30*3,	fnt_main,	"POINTS:"],
+		[draw_text_xl, draw_text_y+30*4,	fnt_points,	string(points)],
+		[draw_text_xl, draw_text_y+30*6,	fnt_main,	"HP:"],
+		[draw_text_xl, draw_text_y+30*9.5,	fnt_main,	"LEVEL:"],
+		[draw_text_xl, draw_text_y+30*10.5, fnt_points, string(player_level)],
 	];
 	draw_txt_length = array_length(draw_txt);
 
@@ -284,13 +193,11 @@ draw_interface = function() {
 		
 		//DRAW LIFE POINTS
 		for (var i = 0; i < obj_player.player_hp; i++) {
-			draw_sprite_ext(spr_life_points, 0, draw_text_xl + (temp_life_points_x*i), draw_text_y+180, image_xscale, image_yscale, image_angle, image_blend, 0.8);
+			draw_sprite_ext(spr_life_points, 0, draw_text_xl + (temp_life_points_x*i), draw_text_y+30*7, image_xscale, image_yscale, image_angle, image_blend, 0.8);
 		}
 	}
 	
-	fullscreen_mode();
-	pause_button();
-	dev_button();
+	if not(pause_off) pause_button();
 }
 #endregion
 
@@ -329,35 +236,50 @@ enemy_spawn = function() {
 #endregion
 
 #region PLAYER LEVEL UP
+seq_level_up = noone;
+
 player_level_up = function() {
-	//Armazena a quantidade pontos atual no jogo
+	//STORES PLAYER'S CURRENT POINTS
 	var points_count = instance_number(obj_point);
 	var alarm_reseted = alarm[0] == -1;
 
-	if (points_count == 0 && alarm_reseted && !leveled_up) {
+	if (points_count == 0 && alarm_reseted && !leveled_up && player_level < 10) {
 		leveled_up = true;
 		player_level++;
 		
-		//Cria os pontos novamente depois de 2 segundos
+		//CREATE THE POINTS AGAIN AFTER 2 SECONDS
 		alarm[0] = room_speed*2;
 		
-		//Quando o número de pontos chega à zero, remove o aviso de último ponto
+		//WHEN THE POINTS NUMBER REACHES ZERO, REMOVE THE LAST POINT WARNING
 		if (instance_exists(obj_point_warning)) {
 			point_warning_created = false;
 			instance_destroy(obj_point_warning);
 		}
+		
+		//LEVEL UP SEQUENCES
+		seq_level_up = layer_sequence_create("Sequences", 0, 0, seq_player_level_up);
+		
+		
+		//LEVEL UP SOUND EFFECT
+		audio_play_sound(snd_player_level_up, 0, false);
 	}
 	
-	//Quando restar somente 1 ponto, cria um aviso de ponto restante
-	if (points_count == 1 && !point_warning_created) {
+	//WHEN ONLY 1 POINTS REMAINS, CREATE A POINT REMAINING WARNING
+	if (points_count == 1 && !point_warning_created && player_level < 9) {
 		point_warning_created = true;
 		instance_create_layer(obj_point.x, obj_point.y, "points", obj_point_warning);
+	}
+	
+	//LEVEL UP SEQUENCE
+	if (layer_sequence_exists("Sequences", seq_level_up)) {
+		layer_sequence_x(seq_level_up, obj_player.x);
+		layer_sequence_y(seq_level_up, obj_player.y-40);
 	}
 }
 #endregion
 
 #region TELEPORT CHECK
-//Método para controlar o teleporte e as sequências do portal
+//METHOD TO CONTROL TELEPORT AND PORTAL SEQUENCES
 teleport_check = function() {
 	portal_angle += 0.5;
 	
@@ -368,39 +290,39 @@ teleport_check = function() {
 		var colliding_portal = place_meeting(x+sign(hspeed)*sprite_get_width(spr_player)/3, y, obj_teleport);
 		
 		if (colliding_portal) {
-			//Teleporte da direita
+			//RIGHT TELEPORT
 			if (hspeed > 0) {
 				layer_sequence_play(obj_controller.right_portal_sequence);
 			
 				var player_portal_right = layer_sequence_create("Sequence_Portal_Effect", right_teleport.x-sign(hspeed)*48, right_teleport.y, seq_player_portal);
 				layer_sequence_speedscale(player_portal_right, 3);
 			}
-			//Teleporte da esquerda
+			//LEFT TELEPORT
 			else if (hspeed < 0) {
 				layer_sequence_play(obj_controller.left_portal_sequence);
 			
 				var player_portal_left = layer_sequence_create("Sequence_Portal_Effect", left_teleport.x-sign(hspeed)*48, left_teleport.y, seq_player_portal);
 				layer_sequence_xscale(player_portal_left, -1);
-				layer_sequence_speedscale(player_portal_left, 3);
+				layer_sequence_speedscale(player_portal_left, 3);	
 			}
 		
-			//Toca o som do portal
+			//PLAY THE PORTAL SOUND EFFECT
 			if (obj_controller.play_sound and !audio_is_playing(snd_portal)) audio_play_sound(snd_portal, 1, false);
-		
-			//Cancela o modo de caça dos inimigos
-			if (instance_exists(obj_enemy)) obj_enemy.hunting_time = 0;
-		
-			//Reseta a última tecla salva
-			keyboard_lastkey = -1;
 
-			//Esconde o player durante a animação
+			//CANCEL ENEMY HUNTING MODE
+			if (instance_exists(obj_enemy)) obj_enemy.hunting_time = 0;
+
+			//RESET THE LAST KEY PRESSED
+			keyboard_lastkey = -1;
+			
+			//HIDE THE PLAYER DURING ANIMATION
 			image_alpha = 0;
 			
 			with(obj_controller) {
-				//Sinaliza que o player está teleportando
+				//WARN THAT THE PLAYER IS TELEPORTING
 				player_teleporting = true;
 		
-				//Executa o alarme, que irá transportar o player e torná-lo visível de novo
+				//EXECUTE AN ALARM, WHICH WILL TELEPORT THE PLAYER AND THEN MAKE IT VISIBLE AGAIN
 				alarm[2] = room_speed/2;
 			}
 		}
@@ -412,40 +334,127 @@ teleport_check = function() {
 go_seq_play = true;
 go_seq_1 = noone;
 
+game_restart_delay = 300;
+game_restart_time = 0;
+
+high_scores_x = room_width/2;
+high_scores_y = room_height-650;
+high_scores_font = fnt_high_scores;
+high_scores_gap = 35;
+high_scores_alpha = 0;
+
+high_scores_values = [];
+load_high_scores();
+
+
+draw_score = function() {
+	//SORTING HIGH SCORES
+	array_sort(high_scores_values, false);
+	
+	high_scores = [
+		[high_scores_x, high_scores_y+high_scores_gap*3.5,	fnt_high_scores_main,	"HIGH SCORES"],
+		[high_scores_x, high_scores_y+high_scores_gap*5,	high_scores_font,		"1. " + string(high_scores_values[0])],
+		[high_scores_x, high_scores_y+high_scores_gap*6,	high_scores_font,		"2. " + string(high_scores_values[1])],
+		[high_scores_x, high_scores_y+high_scores_gap*7,	high_scores_font,		"3. " + string(high_scores_values[2])],
+		[high_scores_x, high_scores_y+high_scores_gap*8,	high_scores_font,		"4. " + string(high_scores_values[3])],
+		[high_scores_x, high_scores_y+high_scores_gap*9,	high_scores_font,		"5. " + string(high_scores_values[4])],
+	];
+	draw_high_scores_length = array_length(high_scores);
+	
+	high_scores_alpha = lerp(high_scores_alpha, 1, 0.01);
+
+	//DRAWING HIGHSCORE
+	for (var i = 0; i < draw_high_scores_length; i++) {
+		draw_set_alpha(high_scores_alpha);
+		draw_set_font(high_scores[i][2]);
+		draw_set_halign(fa_center);
+		draw_text(high_scores[i][0], high_scores[i][1], high_scores[i][3]);
+		draw_set_color(-1);
+
+	}
+
+	//HIGHLIGHTING CURRENT PLAYER'S HIGH SCORE
+	for (var i = 0; i < draw_high_scores_length-2; i++) {
+		if (points == high_scores_values[i] && !instance_exists(obj_player)) {
+			draw_set_color(c_lime);
+			draw_text(high_scores[i+1][0], high_scores[i+1][1], high_scores[i+1][3]);
+			draw_set_color(-1);
+		}
+	}
+
+	draw_set_halign(-1);
+	draw_set_alpha(1);
+}
+
+
 game_over_sequence = function() {
 	var x_pos = room_width/2;
-	var y_pos = room_height/2.5;
+	var y_pos = room_height/4;
 
 	if (go_seq_play) {
 		go_seq_play = false;
 		go_seq_1 = layer_sequence_create("Sequence_Game_Over", x_pos, y_pos, seq_game_over_1);
 		audio_stop_all();
 		audio_play_sound(snd_game_over, 1, false);
+		
+		game_restart_time = game_restart_delay;
 	}
 
 	if (layer_sequence_is_finished(go_seq_1)) {
 		layer_destroy("Sequence_Game_Over");
 		layer_create(0,"Sequence_Game_Over");
 		layer_sequence_create("Sequence_Game_Over", x_pos, y_pos, seq_game_over_2);
-		layer_sequence_create("Sequence_Game_Over", x_pos, (1.4)*y_pos, seq_game_over_message);
+		layer_sequence_create("Sequence_Game_Over", x_pos, (1.5)*y_pos, seq_game_over_message);
 		audio_play_sound(snd_game_over_music, 1, true);
 	}
 }
 
+
 game_restart_check = function() {
+	game_restart_time--;
+	
 	var anykey = keyboard_check_pressed(vk_anykey);
-	if (anykey) game_restart();
+	
+	if (anykey && game_restart_time <= 0) {
+		audio_stop_sound(snd_game_over_music);
+		room_restart();
+	}
 }
 #endregion
 
 
 //POWERUP FUNCTIONS
+#region POWERUP - SETTING POWERUP VALUES
+powerup_settings = [
+	//[powerup_type, spawn_rate, duration, thickness_new, color]
+	[spr_powerup_life,			2,	0,				4,	0],
+	[spr_powerup_speed,			4,	room_speed*10,	4,	c_aqua],
+	[spr_powerup_ghost,			3,	room_speed*8,	4,	c_grey],
+	[spr_powerup_invincible,	1,	room_speed*6,	4,	c_red]
+];
+
+powerup_settings_length = array_length(powerup_settings);
+
+powerups_array = [];
+
+for (var i = 0; i < powerup_settings_length; i++) {
+	var powerup_type		= powerup_settings[i][0];
+	var powerup_spawn_rate	= powerup_settings[i][1];
+	
+	repeat(powerup_spawn_rate) {
+		array_push(powerups_array, powerup_type);
+	}
+}
+
+powerups_array_length = array_length(powerups_array);
+#endregion
+
 #region POWERUP FUNCTIONS - POWERUP_LIFE
 powerup_life_seq = noone;
 
 powerup_life = function() {
 	with (obj_player) {
-		if (player_hp <= 3) player_hp++;
+		if (player_hp < 3) player_hp++;
 		image_alpha = 1;
 	}
 	
@@ -458,17 +467,20 @@ powerup_life = function() {
 #endregion
 
 #region POWERUP FUNCTIONS - POWERUP_SPEED
-powerup_speed_duration = room_speed*10;
-powerup_speed_time = 0;
-powerup_speed_thickness = 0;
-powerup_speed_color = c_aqua;
-running_powerup_speed = false;
+powerup_speed_duration		= powerup_settings[1][2];
+powerup_speed_thickness_new = powerup_settings[1][3];
+powerup_speed_color			= powerup_settings[1][4];
+
+powerup_speed_thickness		= 0;
+
+powerup_speed_time			= 0;
+running_powerup_speed		= false;
 
 powerup_speed = function() {
 	var player_exists = instance_exists(obj_player);
 	
 	if (running_powerup_speed && player_exists) {
-		if !(player_teleporting) powerup_speed_thickness = 4;
+		if !(player_teleporting) powerup_speed_thickness = powerup_speed_thickness_new;
 		else powerup_speed_thickness = 0;
 		
 		obj_player.vel = 4; 
@@ -484,12 +496,15 @@ powerup_speed = function() {
 #endregion
 
 #region POWERUP FUNCTIONS - POWERUP_GHOST
-powerup_ghost_duration = room_speed*10;
-powerup_ghost_time = 0;
-powerup_ghost_thickness = 0;
-powerup_ghost_color = c_gray;
-running_powerup_ghost = false;
-player_alpha = 0.6
+powerup_ghost_duration		= powerup_settings[2][2];
+powerup_ghost_thickness_new = powerup_settings[2][3];
+powerup_ghost_color			= powerup_settings[2][4];
+
+powerup_ghost_thickness		= 0;
+player_alpha				= 0.6;
+
+powerup_ghost_time			= 0;
+running_powerup_ghost		= false;
 
 powerup_ghost = function() {
 	var player_exists = instance_exists(obj_player);
@@ -497,7 +512,7 @@ powerup_ghost = function() {
 		
 	if (running_powerup_ghost && player_exists) {
 		if !(player_teleporting) {
-			powerup_ghost_thickness = 4;
+			powerup_ghost_thickness = powerup_ghost_thickness_new;
 			obj_player.image_alpha = lerp(obj_player.image_alpha, player_alpha, 0.2);
 		}
 		else {
@@ -527,10 +542,13 @@ powerup_ghost = function() {
 #endregion
 
 #region POWERUP FUNCTIONS - POWERUP_INVINCIBLE
-powerup_invincible_duration = room_speed*10;
-powerup_invincible_time = 0;
+powerup_invincible_duration			= powerup_settings[3][2];
+powerup_invincible_thickness_new	= powerup_settings[3][3];
+powerup_invincible_color			= powerup_settings[3][4];
+
 powerup_invincible_thickness = 0;
-powerup_invincible_color = c_red;
+
+powerup_invincible_time = 0;
 running_powerup_invincible = false;
 
 powerup_invincible = function() {
@@ -542,7 +560,7 @@ powerup_invincible = function() {
 		obj_player.player_invincible = true;
 		obj_player.sprite_index = spr_player_invincible;
 		
-		if !(player_teleporting) powerup_invincible_thickness = 4;
+		if !(player_teleporting) powerup_invincible_thickness = powerup_invincible_thickness_new;
 		else powerup_invincible_thickness = 0;
 				
 		if (enemy_exists) {
@@ -609,10 +627,10 @@ powerup_circle_duration = function() {
 #endregion
 
 #region SETTING POWERUP SPAWN VARIABLES
-powerup_spawn_delay = room_speed*2;
-powerup_spawn_time = powerup_spawn_delay;
-powerup_spawn_count = 0;
-powerup_limit = 5;
+powerup_spawn_delay	= room_speed*2;
+powerup_spawn_time	= powerup_spawn_delay;
+powerup_spawn_count	= 0;
+powerup_limit		= 5;
 
 powerup_delay = room_speed*30;
 powerup_time = powerup_delay;
@@ -632,10 +650,8 @@ powerups = function() {
 	var screen_top = 144;
 	var screen_bottom = 900;
 	
-	var powerups = [spr_powerup_life, spr_powerup_ghost, spr_powerup_speed, spr_powerup_invincible];
-	var powerups_length = array_length(powerups);
 
-	if (powerup_spawn_time <= 0 && powerup_spawn_count < powerup_limit && powerups_length != 0) {
+	if (powerup_spawn_time <= 0 && powerup_spawn_count < powerup_limit && powerup_settings_length != 0) {
 		powerup_spawn_time = powerup_spawn_delay;
 		
 		var spawn_x = choose(irandom_range(screen_left, screen_right));
@@ -645,8 +661,8 @@ powerups = function() {
 		var powerup_spawn_x = nearest_powerup_spawnpoint.x;
 		var powerup_spawn_y = nearest_powerup_spawnpoint.y;
 		
-		var random_powerup = choose(irandom_range(0, powerups_length-1));
-		
+		var random_powerup = choose(irandom_range(0, powerups_array_length-1));
+
 		var powerup_instance = instance_create_layer(powerup_spawn_x, powerup_spawn_y, "Powerup", obj_powerup);
 		
 		with (powerup_instance) {
@@ -656,7 +672,7 @@ powerups = function() {
 				other.powerup_spawn_count--;
 			}
 			else {
-				powerup_instance.sprite_index = powerups[random_powerup];
+				powerup_instance.sprite_index = other.powerups_array[random_powerup];
 				
 				switch (powerup_instance.sprite_index) {
 					case spr_powerup_life:
