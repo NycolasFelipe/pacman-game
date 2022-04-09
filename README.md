@@ -1,6 +1,6 @@
 # Pacman Game
 
-This is a project inspired by the nostalgic "PACMAN" game, and was build in the game development software GameMaker.
+This is a project inspired by the nostalgic "PACMAN" game, and was built in the game development software GameMaker Studio 2.
 
 ![pacman_title](https://user-images.githubusercontent.com/71052352/162107885-79dd2259-7c3e-41d0-b7ea-512ea9d2c805.gif)
 
@@ -16,7 +16,7 @@ This is a project inspired by the nostalgic "PACMAN" game, and was build in the 
   - **Ghost Mode:** Makes the player invisible and intangible to ghosts temporarily;<br><br>
   ![powerup_ghost](https://user-images.githubusercontent.com/71052352/162499988-b2df81e1-ebe4-427c-b8a0-ad7e8801e94b.gif)
   
-  - **Invincible Mode**: The player becomes invulnerable and can eat the ghosts for a short time;<br><br>
+  - **Invincible Mode**: The player becomes invulnerable and can defeat the ghosts for a short period of time;<br><br>
   ![powerup_invincible](https://user-images.githubusercontent.com/71052352/162499841-20d6d867-c3ef-4d0d-9061-d29500618875.gif)
 
   - **Increase Speed**: Increases the speed at which the player moves for a certain amount of time;<br><br>
@@ -28,7 +28,7 @@ This is a project inspired by the nostalgic "PACMAN" game, and was build in the 
 ---
 
 ### Difficulty Scaling
-When collecting all the points, the player levels up, and the points spawn again after a few seconds. That way, every time the player levels up, the enemies will become stronger.
+When collecting all the points, the player levels up, and the points spawn again after a few seconds. Every time the player levels up, the enemies will become stronger.
 
 **Default Values:**
 - Ghost walking speed: 1;<br>
@@ -41,7 +41,7 @@ Speed at which the ghost moves when it sees the player, and starts hunting them.
 Duration in seconds of the time the ghost is in hunting mode when seeing the player.
 
 - Ghost hunting multiplier: 3;<br>
-Multiplier of the distance that the ghost needs to be from the player to be able to see it, where the initial value is 3 times a grid (32 pixels), that is, 96 pixels for each direction.
+Multiplier of the distance that the ghost needs to be from the player to be able to see them, where the initial value is 3 times a grid (32 pixels), that is, 96 pixels for each direction.
 
 
 **From level 03:**
