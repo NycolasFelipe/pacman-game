@@ -20,7 +20,43 @@ player_move = function() {
 	var last_key_left	= keyboard_lastkey == ord("A") || keyboard_lastkey == vk_left;
 	var last_key_down	= keyboard_lastkey == ord("S") || keyboard_lastkey == vk_down;
 	var last_key_up		= keyboard_lastkey == ord("W") || keyboard_lastkey == vk_up;
-
+	
+	
+	#region GAMEPAD SUPPORT
+	//RESETING GAMEPAD FLAG
+	if (last_key_right || last_key_left || last_key_down || last_key_up) global.gamepad = 0;
+	
+	//GAMEPAD - STICK
+	var gamepad_moving_stick_horizontally	= abs(gamepad_axis_value(global.gamepad_device_number, gp_axislh)) > 0.2;
+	var gamepad_moving_stick_vertically		= abs(gamepad_axis_value(global.gamepad_device_number, gp_axislv)) > 0.2;
+	var gamepad_moving_stick =  gamepad_moving_stick_horizontally || gamepad_moving_stick_vertically;
+	
+	if (gamepad_moving_stick) {
+		global.gamepad = 1;
+		
+		var gamepad_stick_left	= abs(min(gamepad_axis_value(global.gamepad_device_number, gp_axislh), 0));
+		var gamepad_stick_right = max(gamepad_axis_value(global.gamepad_device_number, gp_axislh), 0);
+		var gamepad_stick_up	= abs(min(gamepad_axis_value(global.gamepad_device_number, gp_axislv), 0));
+		var gamepad_stick_down	= max(gamepad_axis_value(global.gamepad_device_number, gp_axislv), 0);
+		
+		if (gamepad_stick_left)	keyboard_lastkey = vk_left;
+		if (gamepad_stick_right) keyboard_lastkey = vk_right;
+		if (gamepad_stick_up) keyboard_lastkey = vk_up;
+		if (gamepad_stick_down) keyboard_lastkey = vk_down;
+	}
+	
+	//GAMEPAD - PAD
+	var gamepad_pad_left	= gamepad_button_check(global.gamepad_device_number, gp_padl);
+	var gamepad_pad_right	= gamepad_button_check(global.gamepad_device_number, gp_padr);
+	var gamepad_pad_up		= gamepad_button_check(global.gamepad_device_number, gp_padu);
+	var gamepad_pad_down	= gamepad_button_check(global.gamepad_device_number, gp_padd);
+	
+	if (gamepad_pad_left) keyboard_lastkey = vk_left;
+	if (gamepad_pad_right) keyboard_lastkey = vk_right;
+	if (gamepad_pad_up) keyboard_lastkey = vk_up;
+	if (gamepad_pad_down) keyboard_lastkey = vk_down;
+	#endregion
+	
 
 	//DISTANCE TO THE COLLISION OBJECT
 	var colliding_distance = 10;
@@ -46,19 +82,19 @@ player_move = function() {
 		//IF THERE IS NO COLLISION, CHECK WHICH DIRECTION THE PLAYER WANTS TO MOVE AND IF THERE IS ROOM TO TURN.
 		//THE BLOCK WILL KEEP DOING THIS TEST, AND WILL TRY TO TURN TO THE LAST ACTIVATED DIRECTION,
 		//UNLESS THE PLAYER CHANGES DIRECTION.
-		if (last_key_right) and (right_has_space) {
+		if (last_key_right && right_has_space) {
 			vspeed = 0;
 			hspeed = vel;
 		}
-		else if (last_key_left) and (left_has_space) {
+		else if (last_key_left && left_has_space) {
 			vspeed = 0;
 			hspeed = -vel;
 		}
-		else if (last_key_down) and (down_has_space) {
+		else if (last_key_down && down_has_space) {
 			vspeed = vel;
 			hspeed = 0;
 		}
-		else if (last_key_up) and (up_has_space) {
+		else if (last_key_up && up_has_space) {
 			vspeed = -vel;
 			hspeed = 0;
 		}
@@ -115,13 +151,29 @@ player_stop = function() {
 	var key_left	= keyboard_check(ord("A"))	|| keyboard_check(vk_left);
 	var key_down	= keyboard_check(ord("S"))	|| keyboard_check(vk_down);
 	var key_up		= keyboard_check(ord("W"))	|| keyboard_check(vk_up);
+
 	
 	//CHECKS IF KEYS IN OPPOSITE DIRECTIONS ARE BEING PRESSED
 	var stop_x = key_right and key_left;
 	var stop_y = key_down and key_up;
 	var stop = stop_x or stop_y;
 	
-	//IF SO, INTERRUPTS THE PLAYER'S MOVEMENT
+	
+	#region GAMEPAD SUPPORT
+	//GAMEPAD - STOP MOVEMENT
+	var gamepad_pressed_stick = gamepad_button_check_pressed(global.gamepad_device_number, gp_stickl);
+	var gamepad_pressed_x = gamepad_button_check_pressed(global.gamepad_device_number, gp_face1);
+
+	//GAMEPAD - 
+	
+	if (gamepad_pressed_stick || gamepad_pressed_x) {
+		global.gamepad = 1;
+		stop = true;
+	}
+	#endregion
+	
+	
+	//IF STOPPED, INTERRUPTS THE PLAYER'S MOVEMENT
 	if (stop) {
 		has_control = false;
 

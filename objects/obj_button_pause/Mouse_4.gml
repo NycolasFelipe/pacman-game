@@ -1,3 +1,0 @@
-//EXECUTE SCRIPT THAT PAUSES THE GAME
-pause_game();
-

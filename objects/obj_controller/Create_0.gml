@@ -414,8 +414,10 @@ game_restart_check = function() {
 	game_restart_time--;
 	
 	var anykey = keyboard_check_pressed(vk_anykey);
+	var gamepad_1 = gamepad_button_check_pressed(global.gamepad_device_number, gp_face1);
+	var gamepad_2 = gamepad_button_check_pressed(global.gamepad_device_number, gp_face2);
 	
-	if (anykey && game_restart_time <= 0) {
+	if (anykey || gamepad_1 || gamepad_2) && (game_restart_time <= 0) {
 		audio_stop_sound(snd_game_over_music);
 		room_restart();
 	}

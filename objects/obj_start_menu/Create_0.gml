@@ -34,7 +34,7 @@ MENU_OPTIONS_item = [
 	["YES", "NO"],
 ];
 
-MENU_OPTION_delay = 10;
+MENU_OPTION_delay = 5;
 MENU_OPTION_time = 0;
 
 
@@ -231,8 +231,48 @@ checking_input = function() {
 	var key_menu_down	= keyboard_check_pressed(vk_down) || keyboard_check_pressed(ord("S"));
 	var key_menu_move	= key_menu_down-key_menu_up;
 	
-	var key_menu_select = keyboard_check_pressed(vk_enter) || keyboard_check_pressed(vk_space);
-	var mouse_left_pressed = mouse_check_button_pressed(mb_left);
+	var gamepad_selected	= gamepad_button_check_pressed(global.gamepad_device_number, gp_face1);
+	var key_menu_select		= keyboard_check_pressed(vk_enter) || keyboard_check_pressed(vk_space) || gamepad_selected;
+	var mouse_left_pressed	= mouse_check_button_pressed(mb_left);
+	#endregion
+	
+	
+	#region GAMEPAD SUPPORT
+	//RESETING GAMEPAD FLAG	
+	if (key_menu_up || key_menu_down) global.gamepad = 0;
+	
+	//GAMEPAD - CHEKING STICK
+	var gamepad_moving_stick =  abs(gamepad_axis_value(global.gamepad_device_number, gp_axislv)) > 0.2;
+	
+	//GAMEPAD - CHECKING PAD
+	var gamepad_pad_up = gamepad_button_check(global.gamepad_device_number, gp_padu);
+	var gamepad_pad_down = gamepad_button_check(global.gamepad_device_number, gp_padd);
+	var gamepad_moving_pad = gamepad_pad_up || gamepad_pad_down;
+	
+	if (MENU_OPTION_time <= 0) {
+		//GAMEPAD - MOVING STICK
+		if (gamepad_moving_stick) {
+			global.gamepad = 1;
+		
+			var gamepad_stick_up = abs(min(gamepad_axis_value(global.gamepad_device_number, gp_axislv), 0));
+			var gamepad_stick_down = max(gamepad_axis_value(global.gamepad_device_number, gp_axislv), 0);
+		
+			if (gamepad_stick_up) key_menu_move = -1;
+			if (gamepad_stick_down) key_menu_move = 1;
+		}
+	
+		//GAMEPAD - MOVING PAD
+		if (gamepad_pad_up) key_menu_move = -1;
+		if (gamepad_pad_down) key_menu_move = 1;
+	}
+	
+	//RESETING GAMEPAD TIME
+	if (gamepad_moving_stick || gamepad_moving_pad) MENU_OPTION_time = MENU_OPTION_delay/2;
+	show_debug_message(MENU_OPTION_time);
+	
+	//RETURN BUTTON
+	var gamepad_back = gamepad_button_check_pressed(global.gamepad_device_number, gp_face2);
+	if (gamepad_back && MENU_OPTIONS[1][2] == "NO") MENU_OPTIONS_function_1();
 	#endregion
 	
 	
@@ -277,6 +317,7 @@ checking_input = function() {
 		break;
 	}
 	#endregion
+	
 	
 	#region SELECTING MENU OPTION
 	//CHECKING MOUSE OVER MENU OPTIONS	

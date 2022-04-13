@@ -44,3 +44,7 @@ if not(player_exists) {
 	game_restart_check();
 }
 #endregion
+
+if (keyboard_check_pressed(vk_up)) {
+	player_level++;
+}

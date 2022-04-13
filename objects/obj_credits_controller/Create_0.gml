@@ -71,5 +71,7 @@ draw_credits_screen = function() {
 
 checking_input = function() {
 	var any_key = keyboard_check_pressed(vk_anykey);
-	if (any_key) game_restart();
+	var gamepad_1 = gamepad_button_check_pressed(global.gamepad_device_number, gp_face1);
+	var gamepad_2 = gamepad_button_check_pressed(global.gamepad_device_number, gp_face2);
+	if (any_key || gamepad_1 || gamepad_2) game_restart();
 }

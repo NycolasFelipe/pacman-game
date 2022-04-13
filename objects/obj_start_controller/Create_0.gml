@@ -13,6 +13,12 @@ draw_text_xl	= obj_camera.x-display_get_width()/1.9;		//DRAW TEXT X - LEFT
 draw_text_xr	= obj_camera.x+display_get_width()/1.9;		//DRAW TEXT X - RIGHT
 draw_text_y		= obj_camera.y-display_get_height()/1.9;	//DRAW TEXT Y - TOP
 draw_text_yb	= obj_camera.y+display_get_height()/1.9;	//DRAW TEXT Y - BOTTOM
+
+//PLAYER USING GAMEPAD FLAG
+global.gamepad = 0; //0 - USING KEYBOARD, 1 - USING GAMEPAD
+
+//INITIALISING DEVICE NUMBER
+global.gamepad_device_number = 0;
 #endregion
 
 

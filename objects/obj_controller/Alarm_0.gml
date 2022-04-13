@@ -1,7 +1,7 @@
 //POINTS SPAWN
 
 //CREATE THE POINTS AFTER 1 SECOND
-create_points()
+create_points();
 
 //ALLOWS PLAYER BEING ABLE TO LEVEL UP AGAIN
-leveled_up = false
+leveled_up = false;
