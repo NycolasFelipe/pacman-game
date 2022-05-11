@@ -1,6 +1,6 @@
 # Pacman Game
 
-This is a project inspired by the nostalgic "PACMAN" game, and was built in the game development software GameMaker Studio 2.
+This is a project inspired by the nostalgic "PACMAN" game, and was built in the game development software [GameMaker Studio 2](https://gamemaker.io/pt-BR).
 
 ![pacman_title](https://user-images.githubusercontent.com/71052352/162107885-79dd2259-7c3e-41d0-b7ea-512ea9d2c805.gif)
 
@@ -13,19 +13,18 @@ This is a project inspired by the nostalgic "PACMAN" game, and was built in the 
 
 
 #### Four types of powerups:
-  - **Ghost Mode:** Makes the player invisible and intangible to ghosts temporarily;<br><br>
-  ![powerup_ghost](https://user-images.githubusercontent.com/71052352/162499988-b2df81e1-ebe4-427c-b8a0-ad7e8801e94b.gif)
-  
-  - **Invincible Mode**: The player becomes invulnerable and can defeat the ghosts for a short period of time;<br><br>
-  ![powerup_invincible](https://user-images.githubusercontent.com/71052352/162499841-20d6d867-c3ef-4d0d-9061-d29500618875.gif)
 
-  - **Increase Speed**: Increases the speed at which the player moves for a certain amount of time;<br><br>
-  ![powerup_speed](https://user-images.githubusercontent.com/71052352/162499893-80d6beee-723b-441e-8889-879dea5f2910.gif)
-
-  - **Health Point**: Increases the player's health by 1 point.<br><br>
-  ![powerup_life](https://user-images.githubusercontent.com/71052352/162499885-044ca9c8-8b86-4ccd-ba66-0cd26e5cecaf.gif)
-
----
+**Ghost Mode:**                                                                                 | ⠀
+:-----------------------------------------------------------------------------------------------|-:
+Makes the player invisible and intangible to ghosts temporarily.                                | ![powerup_ghost](https://user-images.githubusercontent.com/71052352/162499988-b2df81e1-ebe4-427c-b8a0-ad7e8801e94b.gif)
+**Invincible Mode:**                                                                            |
+The player becomes invulnerable and can defeat the ghosts for a short period of time.           | ![powerup_invincible](https://user-images.githubusercontent.com/71052352/162499841-20d6d867-c3ef-4d0d-9061-d29500618875.gif)
+**Invincible Mode**                                                                             |
+The player becomes invulnerable and can defeat the ghosts for a short period of time.           | ![powerup_invincible](https://user-images.githubusercontent.com/71052352/162499841-20d6d867-c3ef-4d0d-9061-d29500618875.gif)
+**Increase Speed**:                                                                             |
+Increases the speed at which the player moves for a certain amount of time.                     | ![powerup_speed](https://user-images.githubusercontent.com/71052352/162499893-80d6beee-723b-441e-8889-879dea5f2910.gif)
+**Health Point**:                                                                               |
+Increases the player's health by 1 point.                                                       | ![powerup_life](https://user-images.githubusercontent.com/71052352/162499885-044ca9c8-8b86-4ccd-ba66-0cd26e5cecaf.gif)
 
 ### Difficulty Scaling
 When collecting all the points, the player levels up, and the points spawn again after a few seconds. Every time the player levels up, the enemies will become stronger.
@@ -74,8 +73,7 @@ Save and display game high scores upon reaching game over.
 ---
 
 ### Screenshots
-![screenshots](https://user-images.githubusercontent.com/71052352/162550749-143fb197-a4a8-4ed9-b6bd-b80709b3a300.png)
-
+![screenshots](https://user-images.githubusercontent.com/71052352/167958869-248525a8-f7c8-4e1c-9ed6-1c527e553952.png)
 
 ---
 
@@ -84,4 +82,10 @@ Save and display game high scores upon reaching game over.
 
 ---
 
-### Thank you for your time!
+### Thank you
+Thank you for your time, I hope you liked it.<br>
+Made by NycolasFelipe
+
+---
+
+© 2022 GitHub, Inc.
