@@ -17,8 +17,6 @@ This is a project inspired by the nostalgic "PACMAN" game, and was built in the 
 **Ghost Mode:**                                                                                 | ⠀
 :-----------------------------------------------------------------------------------------------|-:
 Makes the player invisible and intangible to ghosts temporarily.                                | ![powerup_ghost](https://user-images.githubusercontent.com/71052352/162499988-b2df81e1-ebe4-427c-b8a0-ad7e8801e94b.gif)
-**Invincible Mode:**                                                                            |
-The player becomes invulnerable and can defeat the ghosts for a short period of time.           | ![powerup_invincible](https://user-images.githubusercontent.com/71052352/162499841-20d6d867-c3ef-4d0d-9061-d29500618875.gif)
 **Invincible Mode**                                                                             |
 The player becomes invulnerable and can defeat the ghosts for a short period of time.           | ![powerup_invincible](https://user-images.githubusercontent.com/71052352/162499841-20d6d867-c3ef-4d0d-9061-d29500618875.gif)
 **Increase Speed**:                                                                             |
