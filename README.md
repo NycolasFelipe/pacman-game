@@ -1,6 +1,6 @@
 # Pacman Game
 
-This is a project inspired by the nostalgic "PACMAN" game, and was built in the game development software [GameMaker Studio 2](https://gamemaker.io/pt-BR).
+This is a game inspired by the nostalgic "PACMAN" game, and was built in the game development software [GameMaker Studio 2](https://gamemaker.io/pt-BR).
 
 ![pacman_title](https://user-images.githubusercontent.com/71052352/162107885-79dd2259-7c3e-41d0-b7ea-512ea9d2c805.gif)
 
